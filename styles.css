@@ -340,6 +340,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   .rush-list { grid-template-columns: repeat(3, 1fr); gap: 36px; }
 }
 
+/* ---------- Membership ---------- */
+.membership { padding: 48px 0 0; }
+.membership-box {
+  max-width: 720px;
+  background: var(--paper);
+  border: 2px solid var(--lake);
+  border-left: 6px solid var(--buoy);
+  border-radius: var(--radius);
+  padding: 26px 28px;
+}
+.membership-box h2 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+.membership-box p { color: #3c4a45; max-width: 52ch; }
+
 /* ---------- Work gallery ---------- */
 .work { padding: 48px 0 56px; }
 .work-grid {
