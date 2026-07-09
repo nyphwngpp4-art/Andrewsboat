@@ -24,10 +24,21 @@ Option B - Git integration (auto-deploys on push):
 2. Build settings: framework preset **None**, build command **(leave empty)**, output directory **/** (repo root).
 3. Save and deploy. Every push to the connected branch redeploys.
 
+Post-deploy step (both options):
+
+- Open `index.html` and replace the two relative `og-image.png` references in the social-preview meta tags with the absolute URL (`https://<project>.pages.dev/og-image.png`). Texting apps and Messenger ignore relative og:image paths; this one edit is what makes the link preview card show up when the demo URL is texted to Andrew.
+
 Production notes:
 
 - The Request Service form is front-end only in the demo. For production, add a Cloudflare Pages Function (e.g. `functions/api/request.js`) that emails submissions to `Info@andrewsmarine.net` (MailChannels or an SMTP API), and point the form at it.
 - **Domain:** `andrewsmarine.net` is already owned - the shop's email runs on it. The production site can map to that domain in Pages > Custom domains instead of buying a new one.
+
+## Pitch notes (field intel, use in the room)
+
+- **Personal-experience opener.** You went to the shop as a real customer needing a boat part. Open with that: what it was like to find him, decide, and show up. You're not selling a theory, you're describing your own path to his counter.
+- **The voicemail is the pitch.** His phone greeting effectively tells callers to text because the shop is too busy. That's proof of demand overflow, in his own recorded voice. It's exactly what the "Heading into a holiday weekend?" section and the request-a-callback form are built to absorb: the site takes the queue so his phone doesn't have to. If he confirms he prefers texts, a "Text the Shop" (`sms:`) button next to the call button is a five-minute add.
+- **Implied reach.** Right now his Google presence is a bare listing with a conflicting address. Just having a real website with matching NAP data widens how far out on the lake he shows up, before any marketing spend. Frame the address fix (checklist item 1) as step one of that.
+- **Phone-overflow upsell (roadmap, not demo).** An AI voice agent (e.g. xAI's voice agent) could answer overflow calls, take name/number/issue, and drop them into the same queue as the form. Pitch it as a later phase after the site proves itself; it pairs naturally with the "too busy to answer" problem the voicemail already admits.
 
 ## Pre-meeting checklist (do these before showing Andrew, or with him)
 

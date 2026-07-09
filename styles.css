@@ -271,6 +271,19 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
   border-radius: var(--radius);
   padding: 22px;
 }
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .service-card,
+  .ph-photo {
+    transition: transform 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
+  }
+  .service-card:hover,
+  .ph-photo:hover {
+    transform: translateY(-2px);
+    border-color: rgba(20, 82, 74, 0.55);
+    box-shadow: 0 6px 16px rgba(12, 56, 49, 0.12);
+  }
+}
 .service-card h3 { font-size: 1.35rem; font-weight: 700; margin-bottom: 8px; }
 .service-card p { font-size: 0.95rem; color: #3c4a45; }
 
