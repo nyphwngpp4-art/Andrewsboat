@@ -3,6 +3,21 @@
 // that emails submissions to Info@andrewsmarine.net.
 
 (function () {
+  // ----- Hero video path correction -----
+  // The replacement upload was added inside /images with the literal filename
+  // "images:hero-lake-brownwood.mp4". Point the background video to that asset.
+  var heroVideo = document.querySelector(".hero-background-video");
+  if (heroVideo) {
+    heroVideo.src = "images/images:hero-lake-brownwood.mp4";
+    heroVideo.load();
+    var playPromise = heroVideo.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(function () {
+        // Autoplay may be blocked; the poster image remains visible.
+      });
+    }
+  }
+
   // ----- Desktop header: restore text action beside the call button -----
   var headerCall = document.querySelector(".header-call");
   if (headerCall && !document.querySelector(".header-text")) {
