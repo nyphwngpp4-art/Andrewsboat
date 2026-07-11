@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Andrew's Marine Maintenance &amp; Repair | Lake Brownwood Boat Repair</title>
-  <meta name="description" content="Lake Brownwood's local shop for outboard, prop, and PWC repair, canvas and upholstery, marine audio, parts, and priority membership. Call or text (325) 320-2018.">
+  <meta name="description" content="Lake Brownwood's local shop for outboard, prop, and PWC repair, winterization, canvas and upholstery, marine audio, parts, and priority membership. Call or text (325) 320-2018.">
   <meta name="theme-color" content="#0c3831">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Andrew's Marine Maintenance &amp; Repair | Lake Brownwood">
-  <meta property="og:description" content="Boat down? Lake Brownwood's local shop for outboards, props, PWCs, canvas, marine audio, and parts. Call or text (325) 320-2018.">
+  <meta property="og:description" content="Boat down? Lake Brownwood's local shop for outboards, props, PWCs, winterization, canvas, marine audio, and parts. Call or text (325) 320-2018.">
   <meta property="og:image" content="og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -17,6 +17,13 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c3831'/%3E%3Cpath d='M4 20 Q8 15 12 20 T20 20 T28 20' fill='none' stroke='%23f6f0e1' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
   <link rel="preload" as="font" type="font/woff2" href="fonts/big-shoulders-display-latin.woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
+  <style>
+    .hero-media { position: relative; min-height: 300px; border-radius: var(--radius); overflow: hidden; background: #0c3831; }
+    .hero-video { width: 100%; height: 100%; min-height: 300px; object-fit: cover; object-position: center; display: block; }
+    .hero-video-note { position: absolute; right: 12px; bottom: 10px; margin: 0; padding: 5px 9px; border-radius: 999px; background: rgba(12,56,49,.76); color: #f6f0e1; font-size: .72rem; letter-spacing: .03em; }
+    @media (min-width: 820px) { .hero-media, .hero-video { min-height: 480px; } }
+    @media (prefers-reduced-motion: reduce) { .hero-video { display: none; } .hero-media { background: url("images/boat-in-tow.jpg") center/cover no-repeat; } }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -41,7 +48,7 @@
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <h1>Boat down? Let's get you back on the water.</h1>
-          <p class="hero-sub">Lake Brownwood's local shop for outboards, props, PWCs, canvas, marine audio, and parts.</p>
+          <p class="hero-sub">Lake Brownwood's local shop for outboards, props, PWCs, winterization, marine audio, and parts.</p>
           <div class="hero-ctas">
             <a href="tel:+13253202018" class="btn btn-primary">Call Now</a>
             <a href="sms:+13253202018" class="btn btn-ghost">Text the Shop</a>
@@ -53,14 +60,19 @@
             <li>Priority membership available</li>
           </ul>
         </div>
-        <img class="hero-photo" src="images/boat-in-tow.jpg" alt="A boat on its trailer, in tow behind a pickup near Lake Brownwood" fetchpriority="high">
+        <div class="hero-media">
+          <video id="hero-video" class="hero-video" autoplay muted loop playsinline preload="metadata" poster="images/boat-in-tow.jpg" aria-label="Drone footage of a repaired boat underway on Lake Brownwood">
+            <source src="images/hero-lake-brownwood.mp4" type="video/mp4">
+          </video>
+          <p class="hero-video-note">Lake Brownwood · customer boat repaired by Andrew's Marine</p>
+        </div>
       </div>
     </section>
 
     <section class="trust-bar" aria-label="What we do">
       <div class="wrap trust-grid">
         <div class="trust-item"><h2>Outboard &amp; PWC Repair</h2><p>Diagnosis, repair, and routine service.</p></div>
-        <div class="trust-item"><h2>Prop Repair</h2><p>Authorized ACME propeller dealer.</p></div>
+        <div class="trust-item"><h2>Winterization</h2><p>Seasonal prep to protect your boat before it sits.</p></div>
         <div class="trust-item"><h2>Canvas &amp; Upholstery</h2><p>Seats, covers, and tops built for Texas summers.</p></div>
         <div class="trust-item"><h2>Marine Audio</h2><p>Wetsound products and clean installations.</p></div>
       </div>
@@ -75,8 +87,10 @@
           <article class="service-card span-3"><h3>Outboard Engine Repair &amp; Service</h3><p>Won't start, running rough, or due for service? We diagnose the problem, explain what it needs, and get to work.</p></article>
           <article class="service-card span-3"><h3>Propeller Repair</h3><p>Bent, dinged, and spun props repaired. If replacement makes more sense, we can help match the right ACME propeller.</p></article>
           <article class="service-card span-2"><h3>PWC &amp; Jet Ski Service</h3><p>Tune-ups, no-starts, drivability problems, and routine maintenance for personal watercraft.</p></article>
+          <article class="service-card span-2"><h3>Winterization &amp; Seasonal Prep</h3><p>Off-season protection and seasonal service to help boats, PWCs, and pontoons stay ready for the next stretch on the water.</p></article>
           <article class="service-card span-2"><h3>Canvas &amp; Upholstery</h3><p>Repairs and replacement work for seats, covers, and bimini tops.</p></article>
           <article class="service-card span-2"><h3>Marine Stereo &amp; Electronics</h3><p>Wetsound marine audio, aftermarket stereo, and electronics installed cleanly and wired correctly.</p></article>
+          <article class="service-card span-2"><h3>Parts &amp; Gear</h3><p>Looking for a specific part? Call or text the shop before you drive over and Andrew can tell you whether it is available or needs to be ordered.</p></article>
         </div>
       </div>
     </section>
@@ -88,7 +102,7 @@
         <ol class="rush-list">
           <li><h3>Get in the queue early</h3><p>Memorial Day, July 4th, and Labor Day can fill the schedule quickly. Use the service request below before the rush builds.</p></li>
           <li><h3>Get a straight answer</h3><p>Call or text the shop and we will tell you what information we need and what the next practical step looks like.</p></li>
-          <li><h3>Send the details</h3><p>Include the boat or PWC, engine, symptoms, and whether it is in the water or on a trailer. Better information means a faster first response.</p></li>
+          <li><h3>Think seasonally</h3><p>When the weather turns, winterization and off-season service can save time, stress, and repair work later.</p></li>
         </ol>
       </div>
     </section>
@@ -109,7 +123,7 @@
         <div class="work-grid">
           <figure class="work-photo wide"><img src="images/pwc-lake.jpg" alt="Two riders on PWCs idling through shallow water on the lake" loading="lazy"></figure>
         </div>
-        <p class="hours-note">Repair work, parts, and marine gear are available through the storefront at 7855 TX-279. Additional project and shop photos can be added with Andrew's approval.</p>
+        <p class="hours-note">Repair work, parts, and marine gear are available through the storefront at 7855 TX-279. Winterization is also a visible part of the current work mix and should remain represented throughout the site. Additional project photos can be added with Andrew's approval.</p>
       </div>
     </section>
 
@@ -166,6 +180,7 @@
               <option>Won't start</option>
               <option>Running rough</option>
               <option>Prop damage</option>
+              <option>Winterization</option>
               <option>Stereo or electronics</option>
               <option>Canvas or upholstery</option>
               <option>Parts inquiry</option>
