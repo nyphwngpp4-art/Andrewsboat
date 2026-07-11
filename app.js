@@ -3,6 +3,17 @@
 // that emails submissions to Info@andrewsmarine.net.
 
 (function () {
+  // ----- Desktop header: restore text action beside the call button -----
+  var headerCall = document.querySelector(".header-call");
+  if (headerCall && !document.querySelector(".header-text")) {
+    var headerText = document.createElement("a");
+    headerText.href = "sms:+13253202018";
+    headerText.className = "btn btn-ghost-dark header-call header-text";
+    headerText.textContent = "Text the Shop";
+    headerText.setAttribute("aria-label", "Text Andrew's Marine");
+    headerCall.insertAdjacentElement("afterend", headerText);
+  }
+
   // ----- Request Service form (demo: validate + confirm, no network) -----
   var form = document.getElementById("service-form");
   if (form) {
