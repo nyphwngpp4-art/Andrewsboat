@@ -7,13 +7,6 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
-    
-    :root {
-      --agave: #1f3a32;
-      --terracotta: #b8552d;
-    }
-    
     body {
       font-family: 'Inter', system_ui, sans-serif;
     }
@@ -21,19 +14,43 @@
     .heading-serif {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 700;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.03em;
     }
 
-    .section-header {
-      font-size: 2.25rem;
-      line-height: 1.1;
-      font-weight: 700;
-      color: #1f3a32;
+    .cinematic-hero {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
     }
-
-    .nav-active {
-      color: #1f3a32;
-      font-weight: 600;
+    
+    .cinematic-hero video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1;
+    }
+    
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom, 
+        rgba(15, 23, 42, 0.42) 0%, 
+        rgba(15, 23, 42, 0.58) 45%, 
+        rgba(15, 23, 42, 0.68) 100%
+      );
+      z-index: 2;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 3;
     }
 
     .service-card {
@@ -44,19 +61,15 @@
       transform: translateY(-4px);
       box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
     }
-
-    .premium-shadow {
-      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
-    }
   </style>
 </head>
 <body class="bg-[#f8f5f0] text-[#2c332b]">
-  
+
   <!-- NAV -->
-  <nav class="bg-white border-b border-[#e5e0d5]">
+  <nav class="bg-white border-b border-[#e5e0d5] sticky top-0 z-50">
     <div class="max-w-screen-xl mx-auto px-6 py-5 flex items-center justify-between">
       <div class="flex items-center gap-x-3">
-        <div class="w-9 h-9 bg-[#1f3a32] rounded-xl flex items-center justify-center">
+        <div class="w-9 h-9 bg-[#1f3a32] rounded-2xl flex items-center justify-center">
           <span class="text-white font-bold text-xl tracking-tighter">AM</span>
         </div>
         <div>
@@ -73,69 +86,69 @@
 
       <div class="flex items-center gap-x-3">
         <a href="tel:3253202018" 
-           class="px-4 py-2 text-sm font-medium border border-[#d1c9b8] rounded-2xl hover:bg-white transition-colors flex items-center gap-x-2">
+           class="px-5 py-2.5 text-sm font-medium border border-[#d1c9b8] rounded-3xl hover:bg-white transition-colors flex items-center gap-x-2">
           <i class="fa-solid fa-phone text-[#b8552d]"></i>
           <span class="hidden sm:inline">Call</span>
         </a>
         <a href="#contact" 
-           class="px-5 py-2 bg-[#1f3a32] text-white text-sm font-medium rounded-2xl hover:bg-[#2a4a40] transition-colors">
+           class="px-6 py-2.5 bg-[#1f3a32] text-white text-sm font-semibold rounded-3xl hover:bg-[#2a4a40] transition-colors">
           Request Service
         </a>
       </div>
     </div>
   </nav>
 
-  <!-- HERO -->
-  <div class="max-w-screen-xl mx-auto px-6 pt-16 pb-20">
-    <div class="max-w-3xl">
-      <div class="inline-flex items-center gap-x-2 bg-white px-4 py-1.5 rounded-3xl text-xs font-medium tracking-widest mb-6 border border-[#e5e0d5]">
-        <div class="w-2 h-2 bg-[#b8552d] rounded-full animate-pulse"></div>
-        <span>LAKE BROWNWOOD, TEXAS</span>
-      </div>
-      
-      <h1 class="text-6xl md:text-7xl leading-[1.05] tracking-tighter font-semibold text-[#1f3a32]">
-        Boat down?<br>
-        <span class="text-[#b8552d]">Let’s get you back on the water.</span>
-      </h1>
-      
-      <p class="mt-6 max-w-md text-lg text-[#4a5248]">
-        Real repair. Real parts. Real people. 
-        A local shop that actually answers when you need help.
-      </p>
+  <!-- CINEMATIC HERO -->
+  <div class="cinematic-hero">
+    <video autoplay muted loop playsinline class="w-full h-full object-cover">
+      <source src="images/images:hero-lake-brownwood.mp4" type="video/mp4">
+    </video>
+    
+    <div class="hero-overlay"></div>
 
-      <div class="flex items-center gap-x-4 mt-8">
-        <a href="#contact" 
-           class="px-8 py-3.5 bg-[#1f3a32] hover:bg-[#2a4a40] transition-all text-white font-semibold rounded-3xl text-sm flex items-center gap-x-3 shadow-sm">
-          REQUEST SERVICE
-          <i class="fa-solid fa-arrow-right"></i>
-        </a>
+    <div class="max-w-screen-xl mx-auto px-6 relative z-10">
+      <div class="max-w-2xl hero-content">
+        <div class="inline-flex items-center gap-x-2 bg-white/90 px-4 py-1.5 rounded-3xl text-xs font-medium tracking-[2px] mb-6 text-[#1f3a32]">
+          LAKE BROWNWOOD, TEXAS
+        </div>
         
-        <a href="sms:3253202018" 
-           class="px-6 py-3.5 border border-[#d1c9b8] hover:bg-white transition-all font-medium rounded-3xl text-sm flex items-center gap-x-2">
-          <i class="fa-solid fa-comment-dots"></i>
-          <span>Text the Shop</span>
-        </a>
-      </div>
-      
-      <div class="flex items-center gap-x-8 mt-8 text-sm">
-        <div class="flex items-center gap-x-2 text-[#6a6f64]">
-          <i class="fa-solid fa-check text-[#b8552d]"></i>
-          <span>Priority Membership Available</span>
+        <h1 class="text-white text-6xl md:text-7xl leading-[1.02] tracking-[-3.5px] font-semibold">
+          Boat down?<br>
+          <span class="text-[#f4d9c8]">Let’s get you back on the water.</span>
+        </h1>
+        
+        <p class="mt-6 max-w-md text-lg text-white/90">
+          Real repair. Real parts. Real people. 
+          A local shop that actually shows up when you need help.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-3 mt-9">
+          <a href="#contact" 
+             class="px-9 py-4 bg-white text-[#1f3a32] font-semibold rounded-3xl text-sm tracking-wider hover:bg-[#f8f5f0] transition-all flex items-center gap-x-3 shadow-xl">
+            REQUEST SERVICE
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          
+          <a href="sms:3253202018" 
+             class="px-7 py-4 border border-white/70 text-white hover:bg-white/10 transition-all font-medium rounded-3xl text-sm flex items-center gap-x-3 backdrop-blur-sm">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span>Text the Shop</span>
+          </a>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- TRUST / WHAT'S WORKING -->
-  <div class="max-w-screen-xl mx-auto px-6 pb-16">
+  <!-- TRUST BAR -->
+  <div class="max-w-screen-xl mx-auto px-6 py-12 border-b border-[#e5e0d5]">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
       <div class="bg-white rounded-3xl p-6 border border-[#e5e0d5]">
         <div class="text-[#b8552d] text-xs tracking-[2px] font-medium mb-3">ESTABLISHED LOCAL SHOP</div>
-        <div class="text-2xl font-semibold tracking-tight">Real storefront.<br>Real inventory.</div>
+        <div class="text-2xl font-semibold tracking-tight">Real storefront.<br>Real parts inventory.</div>
       </div>
       <div class="bg-white rounded-3xl p-6 border border-[#e5e0d5]">
-        <div class="text-[#b8552d] text-xs tracking-[2px] font-medium mb-3">WHAT WE DO</div>
-        <div class="space-y-1 text-[15px]">
+        <div class="text-[#b8552d] text-xs tracking-[2px] font-medium mb-3">WHAT WE HANDLE</div>
+        <div class="space-y-1.5 text-[15px]">
           <div>Outboard &amp; PWC Repair</div>
           <div>Propeller Repair (ACME)</div>
           <div>Canvas &amp; Upholstery</div>
@@ -146,31 +159,28 @@
         <div class="text-[#b8552d] text-xs tracking-[2px] font-medium mb-3">HOW WE WORK</div>
         <div class="text-[15px] leading-relaxed">
           Priority membership for faster service and member pricing. 
-          Text us when the phone is busy.
+          Text often works better than calling when we're busy on boats.
         </div>
       </div>
       <div class="bg-white rounded-3xl p-6 border border-[#e5e0d5] flex flex-col justify-between">
         <div>
-          <div class="text-[#b8552d] text-xs tracking-[2px] font-medium mb-3">CURRENT REALITY</div>
-          <div class="text-[15px]">We’re busy working on boats. That’s why texting often works better than calling.</div>
+          <div class="text-[#b8552d] text-xs tracking-[2px] font-medium mb-3">THE REALITY</div>
+          <div class="text-[15px]">We're usually working on boats. This site exists to make reaching us easier.</div>
         </div>
-        <div class="mt-6 text-xs text-[#6a6f64]">This site exists to make reaching us easier.</div>
       </div>
     </div>
   </div>
 
   <!-- SERVICES -->
-  <div id="services" class="max-w-screen-xl mx-auto px-6 py-16 border-t border-[#e5e0d5]">
+  <div id="services" class="max-w-screen-xl mx-auto px-6 py-16">
     <div class="flex justify-between items-end mb-8">
       <div>
         <div class="text-xs tracking-[2px] text-[#b8552d] font-medium">WHAT WE DO BEST</div>
-        <h2 class="section-header mt-2">Services</h2>
+        <h2 class="text-4xl font-semibold tracking-tight mt-2">Services</h2>
       </div>
-      <a href="#contact" class="hidden md:block text-sm font-medium text-[#b8552d] hover:underline">Request a repair →</a>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <!-- Service Cards -->
       <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
         <div class="flex items-center gap-x-3 mb-4">
           <i class="fa-solid fa-tools text-2xl text-[#b8552d]"></i>
@@ -192,7 +202,7 @@
           <i class="fa-solid fa-ship text-2xl text-[#b8552d]"></i>
           <h3 class="font-semibold text-xl">Propeller Repair &amp; ACME</h3>
         </div>
-        <p class="text-[#4a5248]">Expert propeller repair and sales. We carry ACME propellers and can match the right one for your boat.</p>
+        <p class="text-[#4a5248]">Expert propeller repair and sales. We carry ACME propellers and match the right one for your boat.</p>
       </div>
 
       <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
@@ -211,15 +221,12 @@
         <p class="text-[#4a5248]">New stereos, speakers, fish finders, and electronics installation.</p>
       </div>
 
-      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5] flex flex-col justify-between">
-        <div>
-          <div class="flex items-center gap-x-3 mb-4">
-            <i class="fa-solid fa-boxes text-2xl text-[#b8552d]"></i>
-            <h3 class="font-semibold text-xl">Parts &amp; Gear</h3>
-          </div>
-          <p class="text-[#4a5248]">We stock common parts and accessories so you’re not waiting on shipping.</p>
+      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
+        <div class="flex items-center gap-x-3 mb-4">
+          <i class="fa-solid fa-boxes text-2xl text-[#b8552d]"></i>
+          <h3 class="font-semibold text-xl">Parts &amp; Gear</h3>
         </div>
-        <div class="text-xs text-[#6a6f64] mt-4">Ask us about parts availability</div>
+        <p class="text-[#4a5248]">We stock common parts and accessories so you're not waiting on shipping.</p>
       </div>
     </div>
   </div>
@@ -228,13 +235,13 @@
   <div id="membership" class="max-w-screen-xl mx-auto px-6 py-16 bg-white border-y border-[#e5e0d5]">
     <div class="max-w-2xl">
       <div class="text-xs tracking-[2px] text-[#b8552d] font-medium">FOR OUR REGULAR CUSTOMERS</div>
-      <h2 class="section-header mt-3">Priority Membership</h2>
+      <h2 class="text-4xl font-semibold tracking-tight mt-3">Priority Membership</h2>
       <p class="mt-4 text-lg">Andrew already offers priority service and member pricing to customers who want faster turnaround and better rates.</p>
       
       <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div class="border border-[#e5e0d5] rounded-3xl p-6">
-          <div class="font-semibold mb-2">What members get</div>
-          <ul class="space-y-2 text-sm">
+          <div class="font-semibold mb-3">What members get</div>
+          <ul class="space-y-2.5 text-sm">
             <li class="flex gap-x-2"><i class="fa-solid fa-check mt-1 text-[#b8552d]"></i> Priority scheduling</li>
             <li class="flex gap-x-2"><i class="fa-solid fa-check mt-1 text-[#b8552d]"></i> Member pricing on parts &amp; labor</li>
             <li class="flex gap-x-2"><i class="fa-solid fa-check mt-1 text-[#b8552d]"></i> Faster response on text requests</li>
@@ -243,10 +250,10 @@
         <div class="border border-[#e5e0d5] rounded-3xl p-6 flex flex-col">
           <div class="flex-1">
             <div class="font-semibold mb-2">Want to join?</div>
-            <p class="text-sm text-[#4a5248]">Just let us know. We’ll go over the details and get you set up.</p>
+            <p class="text-sm text-[#4a5248]">Just let us know. We'll go over the details and get you set up.</p>
           </div>
           <a href="sms:3253202018?body=Hi%20Andrew%2C%20I%27d%20like%20more%20information%20about%20the%20priority%20membership." 
-             class="mt-6 inline-block text-center px-6 py-3 bg-[#1f3a32] text-white rounded-2xl text-sm font-medium">
+             class="mt-6 inline-block text-center px-6 py-3.5 bg-[#1f3a32] text-white rounded-2xl text-sm font-medium">
             Ask About Membership
           </a>
         </div>
@@ -254,16 +261,15 @@
     </div>
   </div>
 
-  <!-- CONTACT / FORM -->
+  <!-- CONTACT FORM -->
   <div id="contact" class="max-w-screen-xl mx-auto px-6 py-20">
     <div class="max-w-2xl mx-auto">
       <div class="text-center mb-10">
         <div class="text-xs tracking-[2px] text-[#b8552d] font-medium">LET’S GET STARTED</div>
-        <h2 class="section-header mt-3">Request Service</h2>
+        <h2 class="text-4xl font-semibold tracking-tight mt-3">Request Service</h2>
         <p class="mt-3 text-[#4a5248]">Tell us what’s going on with your boat. We’ll get back to you quickly.</p>
       </div>
 
-      <!-- FORM -->
       <form id="serviceForm" class="bg-white border border-[#e5e0d5] rounded-3xl p-8 space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
@@ -290,7 +296,7 @@
         </div>
 
         <div>
-          <label class="text-xs font-medium text-[#6a6f64] block mb-1.5">TELL US MORE (OPTIONAL)</label>
+          <label class="text-xs font-medium text-[#6a6f64] block mb-1.5">TELL US MORE</label>
           <textarea id="message" rows="4" placeholder="What's happening with the boat? Any symptoms or recent work?" 
                     class="w-full border border-[#d1c9b8] rounded-3xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]"></textarea>
         </div>
@@ -322,17 +328,12 @@
       </div>
       
       <div class="text-[10px] text-[#9a9d92] mt-10">
-        This is a working concept. Final details, photos, and membership information will be confirmed with Andrew before launch.
+        This is a working concept. Final details and photos will be confirmed with Andrew before launch.
       </div>
     </div>
   </footer>
 
   <script>
-    // Tailwind script
-    function initializeTailwind() {
-      document.documentElement.style.setProperty('--accent', '#b8552d');
-    }
-
     // Form handling
     document.getElementById('serviceForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -343,25 +344,21 @@
       btn.innerHTML = 'SENDING...';
       btn.disabled = true;
       
-      // Simulate sending (in real version this would connect to n8n/email)
       setTimeout(() => {
         btn.innerHTML = 'REQUEST RECEIVED ✓';
         btn.classList.remove('bg-[#1f3a32]');
         btn.classList.add('bg-green-600');
         
         setTimeout(() => {
-          alert("Thanks! Andrew will get back to you shortly. (In production, this would send a structured message to Andrew)");
+          alert("Thanks! This would send a structured message to Andrew in production.");
           this.reset();
           btn.innerHTML = originalText;
           btn.disabled = false;
           btn.classList.add('bg-[#1f3a32]');
           btn.classList.remove('bg-green-600');
-        }, 1800);
-      }, 1200);
+        }, 1600);
+      }, 1100);
     });
-
-    // Initialize
-    initializeTailwind();
   </script>
 </body>
 </html>
