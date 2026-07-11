@@ -18,11 +18,101 @@
   <link rel="preload" as="font" type="font/woff2" href="fonts/big-shoulders-display-latin.woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
   <style>
-    .hero-media { position: relative; min-height: 300px; border-radius: var(--radius); overflow: hidden; background: #0c3831; }
-    .hero-video { width: 100%; height: 100%; min-height: 300px; object-fit: cover; object-position: center; display: block; }
-    .hero-video-note { position: absolute; right: 12px; bottom: 10px; margin: 0; padding: 5px 9px; border-radius: 999px; background: rgba(12,56,49,.76); color: #f6f0e1; font-size: .72rem; letter-spacing: .03em; }
-    @media (min-width: 820px) { .hero-media, .hero-video { min-height: 480px; } }
-    @media (prefers-reduced-motion: reduce) { .hero-video { display: none; } .hero-media { background: url("images/boat-in-tow.jpg") center/cover no-repeat; } }
+    .hero {
+      position: relative;
+      min-height: clamp(560px, 78vh, 820px);
+      padding: 0;
+      overflow: hidden;
+      background: #0c3831 url("images/boat-in-tow.jpg") center / cover no-repeat;
+      isolation: isolate;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background:
+        linear-gradient(90deg, rgba(6, 31, 27, .88) 0%, rgba(6, 31, 27, .68) 45%, rgba(6, 31, 27, .28) 75%, rgba(6, 31, 27, .18) 100%),
+        linear-gradient(0deg, rgba(6, 31, 27, .42) 0%, transparent 45%);
+    }
+    .hero-background-video {
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+    .hero-grid {
+      position: relative;
+      display: flex;
+      min-height: clamp(560px, 78vh, 820px);
+      align-items: center;
+      padding-top: 72px;
+      padding-bottom: 72px;
+    }
+    .hero-copy {
+      width: min(680px, 100%);
+      padding: 34px 0;
+    }
+    .hero h1 {
+      max-width: 11ch;
+      font-size: clamp(3rem, 7vw, 5.8rem);
+      line-height: .92;
+      text-shadow: 0 3px 24px rgba(0, 0, 0, .28);
+    }
+    .hero-sub {
+      max-width: 52ch;
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      text-shadow: 0 2px 12px rgba(0, 0, 0, .35);
+    }
+    .hero-video-note {
+      position: absolute;
+      right: 20px;
+      bottom: 18px;
+      margin: 0;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(12, 56, 49, .72);
+      color: #f6f0e1;
+      font-size: .72rem;
+      letter-spacing: .03em;
+      backdrop-filter: blur(4px);
+    }
+    @media (max-width: 700px) {
+      .hero {
+        min-height: 650px;
+      }
+      .hero::after {
+        background:
+          linear-gradient(90deg, rgba(6, 31, 27, .78) 0%, rgba(6, 31, 27, .46) 100%),
+          linear-gradient(0deg, rgba(6, 31, 27, .68) 0%, rgba(6, 31, 27, .08) 72%);
+      }
+      .hero-grid {
+        min-height: 650px;
+        align-items: flex-end;
+        padding-top: 100px;
+        padding-bottom: 88px;
+      }
+      .hero-copy {
+        padding: 0;
+      }
+      .hero-background-video {
+        object-position: 58% center;
+      }
+      .hero h1 {
+        max-width: 9ch;
+      }
+      .hero-video-note {
+        left: 20px;
+        right: auto;
+        bottom: 18px;
+      }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-background-video { display: none; }
+    }
   </style>
 </head>
 <body>
@@ -45,6 +135,9 @@
 
   <main id="top">
     <section class="hero">
+      <video class="hero-background-video" autoplay muted loop playsinline preload="metadata" poster="images/boat-in-tow.jpg" aria-hidden="true">
+        <source src="images/hero-lake-brownwood.mp4" type="video/mp4">
+      </video>
       <div class="wrap hero-grid">
         <div class="hero-copy">
           <h1>Boat down? Let's get you back on the water.</h1>
@@ -60,13 +153,8 @@
             <li>Priority membership available</li>
           </ul>
         </div>
-        <div class="hero-media">
-          <video id="hero-video" class="hero-video" autoplay muted loop playsinline preload="metadata" poster="images/boat-in-tow.jpg" aria-label="Drone footage of a repaired boat underway on Lake Brownwood">
-            <source src="images/hero-lake-brownwood.mp4" type="video/mp4">
-          </video>
-          <p class="hero-video-note">Lake Brownwood · customer boat repaired by Andrew's Marine</p>
-        </div>
       </div>
+      <p class="hero-video-note">Lake Brownwood · customer boat repaired by Andrew's Marine</p>
     </section>
 
     <section class="trust-bar" aria-label="What we do">
