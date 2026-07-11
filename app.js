@@ -3,17 +3,50 @@
 // that emails submissions to Info@andrewsmarine.net.
 
 (function () {
-  // ----- Hero video path correction -----
-  // The replacement upload was added inside /images with the literal filename
-  // "images:hero-lake-brownwood.mp4". Point the background video to that asset.
+  // ----- Runtime styles for video loading and mobile quick actions -----
+  var runtimeStyles = document.createElement("style");
+  runtimeStyles.textContent = [
+    ".hero { background-color: #0c3831 !important; background-image: none !important; }",
+    ".hero-background-video { opacity: 0; transition: opacity .3s ease; }",
+    ".hero-background-video.is-ready { opacity: 1; }",
+    "@media (max-width: 899px) {",
+    "  .mobile-bar {",
+    "    grid-template-columns: 1fr 1fr !important;",
+    "    transform: translateY(120%);",
+    "    opacity: 0;",
+    "    pointer-events: none;",
+    "    transition: transform .22s ease, opacity .22s ease;",
+    "  }",
+    "  .mobile-bar.is-visible {",
+    "    transform: translateY(0);",
+    "    opacity: 1;",
+    "    pointer-events: auto;",
+    "  }",
+    "}"
+  ].join("\n");
+  document.head.appendChild(runtimeStyles);
+
+  // ----- Hero video path and first-load behavior -----
   var heroVideo = document.querySelector(".hero-background-video");
   if (heroVideo) {
+    heroVideo.removeAttribute("poster");
+    heroVideo.preload = "auto";
     heroVideo.src = "images/images:hero-lake-brownwood.mp4";
+
+    function revealVideo() {
+      heroVideo.classList.add("is-ready");
+    }
+
+    heroVideo.addEventListener("loadeddata", revealVideo, { once: true });
+    heroVideo.addEventListener("canplay", revealVideo, { once: true });
+    heroVideo.addEventListener("playing", revealVideo, { once: true });
     heroVideo.load();
+
     var playPromise = heroVideo.play();
     if (playPromise && typeof playPromise.catch === "function") {
       playPromise.catch(function () {
-        // Autoplay may be blocked; the poster image remains visible.
+        // Autoplay can be blocked by browser settings. The hero remains a solid
+        // deep teal instead of flashing an unrelated poster image.
       });
     }
   }
@@ -27,6 +60,22 @@
     headerText.textContent = "Text the Shop";
     headerText.setAttribute("aria-label", "Text Andrew's Marine");
     headerCall.insertAdjacentElement("afterend", headerText);
+  }
+
+  // ----- Mobile sticky actions: Call/Text only, shown after scrolling -----
+  var mobileBar = document.querySelector(".mobile-bar");
+  if (mobileBar) {
+    var requestAction = mobileBar.querySelector('a[href="#request"]');
+    if (requestAction) requestAction.remove();
+
+    function updateMobileBar() {
+      var show = window.scrollY > 120;
+      mobileBar.classList.toggle("is-visible", show);
+      mobileBar.setAttribute("aria-hidden", show ? "false" : "true");
+    }
+
+    updateMobileBar();
+    window.addEventListener("scroll", updateMobileBar, { passive: true });
   }
 
   // ----- Request Service form (demo: validate + confirm, no network) -----
@@ -59,9 +108,7 @@
     });
   }
 
-  // ----- Scroll reveal: one gentle fade-up per section as it enters view.
-  // Motivation: gives the long single page a sense of pace on first read.
-  // Gated: skipped entirely under prefers-reduced-motion.
+  // ----- Scroll reveal: one gentle fade-up per section as it enters view. -----
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
   if (!reduce.matches && "IntersectionObserver" in window) {
     var targets = document.querySelectorAll("main section .wrap");
