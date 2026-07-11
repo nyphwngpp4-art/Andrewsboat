@@ -3,310 +3,365 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Andrew's Marine Maintenance &amp; Repair | Lake Brownwood Boat Repair</title>
-  <meta name="description" content="Lake Brownwood's local shop for outboard, prop, and PWC repair, winterization, canvas and upholstery, marine audio, parts, and priority membership. Call or text (325) 320-2018.">
-  <meta name="theme-color" content="#0c3831">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Andrew's Marine Maintenance &amp; Repair | Lake Brownwood">
-  <meta property="og:description" content="Boat down? Lake Brownwood's local shop for outboards, props, PWCs, winterization, canvas, marine audio, and parts. Call or text (325) 320-2018.">
-  <meta property="og:image" content="og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="og-image.png">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230c3831'/%3E%3Cpath d='M4 20 Q8 15 12 20 T20 20 T28 20' fill='none' stroke='%23f6f0e1' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E">
-  <link rel="preload" as="font" type="font/woff2" href="fonts/big-shoulders-display-latin.woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css">
+  <title>Andrew's Marine | Lake Brownwood</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    .hero {
-      position: relative;
-      min-height: clamp(560px, 78vh, 820px);
-      padding: 0;
-      overflow: hidden;
-      background: #0c3831 url("images/boat-in-tow.jpg") center / cover no-repeat;
-      isolation: isolate;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@700&amp;display=swap');
+    
+    :root {
+      --agave: #1f3a32;
+      --terracotta: #b8552d;
     }
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: -1;
-      background:
-        linear-gradient(90deg, rgba(6, 31, 27, .88) 0%, rgba(6, 31, 27, .68) 45%, rgba(6, 31, 27, .28) 75%, rgba(6, 31, 27, .18) 100%),
-        linear-gradient(0deg, rgba(6, 31, 27, .42) 0%, transparent 45%);
+    
+    body {
+      font-family: 'Inter', system_ui, sans-serif;
     }
-    .hero-background-video {
-      position: absolute;
-      inset: 0;
-      z-index: -2;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
+    
+    .heading-serif {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      letter-spacing: -0.025em;
     }
-    .hero-grid {
-      position: relative;
-      display: flex;
-      min-height: clamp(560px, 78vh, 820px);
-      align-items: center;
-      padding-top: 72px;
-      padding-bottom: 72px;
+
+    .section-header {
+      font-size: 2.25rem;
+      line-height: 1.1;
+      font-weight: 700;
+      color: #1f3a32;
     }
-    .hero-copy {
-      width: min(680px, 100%);
-      padding: 34px 0;
+
+    .nav-active {
+      color: #1f3a32;
+      font-weight: 600;
     }
-    .hero h1 {
-      max-width: 11ch;
-      font-size: clamp(3rem, 7vw, 5.8rem);
-      line-height: .92;
-      text-shadow: 0 3px 24px rgba(0, 0, 0, .28);
+
+    .service-card {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .hero-sub {
-      max-width: 52ch;
-      font-size: clamp(1.05rem, 2vw, 1.28rem);
-      text-shadow: 0 2px 12px rgba(0, 0, 0, .35);
+    
+    .service-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
     }
-    .hero-video-note {
-      position: absolute;
-      right: 20px;
-      bottom: 18px;
-      margin: 0;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: rgba(12, 56, 49, .72);
-      color: #f6f0e1;
-      font-size: .72rem;
-      letter-spacing: .03em;
-      backdrop-filter: blur(4px);
-    }
-    @media (max-width: 700px) {
-      .hero {
-        min-height: 650px;
-      }
-      .hero::after {
-        background:
-          linear-gradient(90deg, rgba(6, 31, 27, .78) 0%, rgba(6, 31, 27, .46) 100%),
-          linear-gradient(0deg, rgba(6, 31, 27, .68) 0%, rgba(6, 31, 27, .08) 72%);
-      }
-      .hero-grid {
-        min-height: 650px;
-        align-items: flex-end;
-        padding-top: 100px;
-        padding-bottom: 88px;
-      }
-      .hero-copy {
-        padding: 0;
-      }
-      .hero-background-video {
-        object-position: 58% center;
-      }
-      .hero h1 {
-        max-width: 9ch;
-      }
-      .hero-video-note {
-        left: 20px;
-        right: auto;
-        bottom: 18px;
-      }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .hero-background-video { display: none; }
+
+    .premium-shadow {
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05);
     }
   </style>
 </head>
-<body>
-  <header class="site-header">
-    <div class="wrap header-inner">
-      <a href="#top" class="wordmark" aria-label="Andrew's Marine Maintenance and Repair, home">
-        <span class="wordmark-top">Andrew's</span>
-        <span class="wordmark-bottom">Marine Maintenance &amp; Repair</span>
-      </a>
-      <nav class="site-nav" aria-label="Page sections">
-        <a href="#services">Services</a>
-        <a href="#rush">The Rush</a>
-        <a href="#membership">Membership</a>
-        <a href="#work">Our Work</a>
-        <a href="#hours">Hours</a>
-      </nav>
-      <a href="tel:+13253202018" class="btn btn-primary header-call">Call (325) 320-2018</a>
-    </div>
-  </header>
+<body class="bg-[#f8f5f0] text-[#2c332b]">
+  
+  <!-- NAV -->
+  <nav class="bg-white border-b border-[#e5e0d5]">
+    <div class="max-w-screen-xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div class="flex items-center gap-x-3">
+        <div class="w-9 h-9 bg-[#1f3a32] rounded-xl flex items-center justify-center">
+          <span class="text-white font-bold text-xl tracking-tighter">AM</span>
+        </div>
+        <div>
+          <div class="font-semibold text-xl tracking-tight">Andrew's Marine</div>
+          <div class="text-[10px] text-[#6a6f64] -mt-1">Lake Brownwood</div>
+        </div>
+      </div>
+      
+      <div class="hidden md:flex items-center gap-x-8 text-sm">
+        <a href="#services" class="hover:text-[#1f3a32] transition-colors">Services</a>
+        <a href="#membership" class="hover:text-[#1f3a32] transition-colors">Membership</a>
+        <a href="#contact" class="hover:text-[#1f3a32] transition-colors">Contact</a>
+      </div>
 
-  <main id="top">
-    <section class="hero">
-      <video class="hero-background-video" autoplay muted loop playsinline preload="metadata" poster="images/boat-in-tow.jpg" aria-hidden="true">
-        <source src="images/hero-lake-brownwood.mp4" type="video/mp4">
-      </video>
-      <div class="wrap hero-grid">
-        <div class="hero-copy">
-          <h1>Boat down? Let's get you back on the water.</h1>
-          <p class="hero-sub">Lake Brownwood's local shop for outboards, props, PWCs, winterization, marine audio, and parts.</p>
-          <div class="hero-ctas">
-            <a href="tel:+13253202018" class="btn btn-primary">Call Now</a>
-            <a href="sms:+13253202018" class="btn btn-ghost">Text the Shop</a>
-            <a href="#request" class="btn btn-ghost">Request Service</a>
+      <div class="flex items-center gap-x-3">
+        <a href="tel:3253202018" 
+           class="px-4 py-2 text-sm font-medium border border-[#d1c9b8] rounded-2xl hover:bg-white transition-colors flex items-center gap-x-2">
+          <i class="fa-solid fa-phone text-[#b8552d]"></i>
+          <span class="hidden sm:inline">Call</span>
+        </a>
+        <a href="#contact" 
+           class="px-5 py-2 bg-[#1f3a32] text-white text-sm font-medium rounded-2xl hover:bg-[#2a4a40] transition-colors">
+          Request Service
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="max-w-screen-xl mx-auto px-6 pt-16 pb-20">
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center gap-x-2 bg-white px-4 py-1.5 rounded-3xl text-xs font-medium tracking-widest mb-6 border border-[#e5e0d5]">
+        <div class="w-2 h-2 bg-[#b8552d] rounded-full animate-pulse"></div>
+        <span>LAKE BROWNWOOD, TEXAS</span>
+      </div>
+      
+      <h1 class="text-6xl md:text-7xl leading-[1.05] tracking-tighter font-semibold text-[#1f3a32]">
+        Boat down?<br>
+        <span class="text-[#b8552d]">Let’s get you back on the water.</span>
+      </h1>
+      
+      <p class="mt-6 max-w-md text-lg text-[#4a5248]">
+        Real repair. Real parts. Real people. 
+        A local shop that actually answers when you need help.
+      </p>
+
+      <div class="flex items-center gap-x-4 mt-8">
+        <a href="#contact" 
+           class="px-8 py-3.5 bg-[#1f3a32] hover:bg-[#2a4a40] transition-all text-white font-semibold rounded-3xl text-sm flex items-center gap-x-3 shadow-sm">
+          REQUEST SERVICE
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        
+        <a href="sms:3253202018" 
+           class="px-6 py-3.5 border border-[#d1c9b8] hover:bg-white transition-all font-medium rounded-3xl text-sm flex items-center gap-x-2">
+          <i class="fa-solid fa-comment-dots"></i>
+          <span>Text the Shop</span>
+        </a>
+      </div>
+      
+      <div class="flex items-center gap-x-8 mt-8 text-sm">
+        <div class="flex items-center gap-x-2 text-[#6a6f64]">
+          <i class="fa-solid fa-check text-[#b8552d]"></i>
+          <span>Priority Membership Available</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TRUST / WHAT'S WORKING -->
+  <div class="max-w-screen-xl mx-auto px-6 pb-16">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="bg-white rounded-3xl p-6 border border-[#e5e0d5]">
+        <div class="text-[#b8552d] text-xs tracking-[2px] font-medium mb-3">ESTABLISHED LOCAL SHOP</div>
+        <div class="text-2xl font-semibold tracking-tight">Real storefront.<br>Real inventory.</div>
+      </div>
+      <div class="bg-white rounded-3xl p-6 border border-[#e5e0d5]">
+        <div class="text-[#b8552d] text-xs tracking-[2px] font-medium mb-3">WHAT WE DO</div>
+        <div class="space-y-1 text-[15px]">
+          <div>Outboard &amp; PWC Repair</div>
+          <div>Propeller Repair (ACME)</div>
+          <div>Canvas &amp; Upholstery</div>
+          <div>Marine Audio &amp; Electronics</div>
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl p-6 border border-[#e5e0d5]">
+        <div class="text-[#b8552d] text-xs tracking-[2px] font-medium mb-3">HOW WE WORK</div>
+        <div class="text-[15px] leading-relaxed">
+          Priority membership for faster service and member pricing. 
+          Text us when the phone is busy.
+        </div>
+      </div>
+      <div class="bg-white rounded-3xl p-6 border border-[#e5e0d5] flex flex-col justify-between">
+        <div>
+          <div class="text-[#b8552d] text-xs tracking-[2px] font-medium mb-3">CURRENT REALITY</div>
+          <div class="text-[15px]">We’re busy working on boats. That’s why texting often works better than calling.</div>
+        </div>
+        <div class="mt-6 text-xs text-[#6a6f64]">This site exists to make reaching us easier.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <div id="services" class="max-w-screen-xl mx-auto px-6 py-16 border-t border-[#e5e0d5]">
+    <div class="flex justify-between items-end mb-8">
+      <div>
+        <div class="text-xs tracking-[2px] text-[#b8552d] font-medium">WHAT WE DO BEST</div>
+        <h2 class="section-header mt-2">Services</h2>
+      </div>
+      <a href="#contact" class="hidden md:block text-sm font-medium text-[#b8552d] hover:underline">Request a repair →</a>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <!-- Service Cards -->
+      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
+        <div class="flex items-center gap-x-3 mb-4">
+          <i class="fa-solid fa-tools text-2xl text-[#b8552d]"></i>
+          <h3 class="font-semibold text-xl">Outboard &amp; PWC Repair</h3>
+        </div>
+        <p class="text-[#4a5248]">Won't start, running rough, or due for service? We diagnose the problem, explain what it needs, and get it done right.</p>
+      </div>
+
+      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
+        <div class="flex items-center gap-x-3 mb-4">
+          <i class="fa-solid fa-sync text-2xl text-[#b8552d]"></i>
+          <h3 class="font-semibold text-xl">Winterization &amp; Storage</h3>
+        </div>
+        <p class="text-[#4a5248]">Proper winterization so your boat is ready when the season starts again.</p>
+      </div>
+
+      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
+        <div class="flex items-center gap-x-3 mb-4">
+          <i class="fa-solid fa-ship text-2xl text-[#b8552d]"></i>
+          <h3 class="font-semibold text-xl">Propeller Repair &amp; ACME</h3>
+        </div>
+        <p class="text-[#4a5248]">Expert propeller repair and sales. We carry ACME propellers and can match the right one for your boat.</p>
+      </div>
+
+      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
+        <div class="flex items-center gap-x-3 mb-4">
+          <i class="fa-solid fa-chair text-2xl text-[#b8552d]"></i>
+          <h3 class="font-semibold text-xl">Canvas &amp; Upholstery</h3>
+        </div>
+        <p class="text-[#4a5248]">Bimini tops, covers, seating, and custom canvas work done right here at the shop.</p>
+      </div>
+
+      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
+        <div class="flex items-center gap-x-3 mb-4">
+          <i class="fa-solid fa-volume-up text-2xl text-[#b8552d]"></i>
+          <h3 class="font-semibold text-xl">Marine Audio &amp; Electronics</h3>
+        </div>
+        <p class="text-[#4a5248]">New stereos, speakers, fish finders, and electronics installation.</p>
+      </div>
+
+      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5] flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-x-3 mb-4">
+            <i class="fa-solid fa-boxes text-2xl text-[#b8552d]"></i>
+            <h3 class="font-semibold text-xl">Parts &amp; Gear</h3>
           </div>
-          <ul class="hero-trust" aria-label="Why boaters choose us">
-            <li>Local &amp; independent</li>
-            <li>Storefront with parts and gear</li>
-            <li>Priority membership available</li>
+          <p class="text-[#4a5248]">We stock common parts and accessories so you’re not waiting on shipping.</p>
+        </div>
+        <div class="text-xs text-[#6a6f64] mt-4">Ask us about parts availability</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MEMBERSHIP -->
+  <div id="membership" class="max-w-screen-xl mx-auto px-6 py-16 bg-white border-y border-[#e5e0d5]">
+    <div class="max-w-2xl">
+      <div class="text-xs tracking-[2px] text-[#b8552d] font-medium">FOR OUR REGULAR CUSTOMERS</div>
+      <h2 class="section-header mt-3">Priority Membership</h2>
+      <p class="mt-4 text-lg">Andrew already offers priority service and member pricing to customers who want faster turnaround and better rates.</p>
+      
+      <div class="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="border border-[#e5e0d5] rounded-3xl p-6">
+          <div class="font-semibold mb-2">What members get</div>
+          <ul class="space-y-2 text-sm">
+            <li class="flex gap-x-2"><i class="fa-solid fa-check mt-1 text-[#b8552d]"></i> Priority scheduling</li>
+            <li class="flex gap-x-2"><i class="fa-solid fa-check mt-1 text-[#b8552d]"></i> Member pricing on parts &amp; labor</li>
+            <li class="flex gap-x-2"><i class="fa-solid fa-check mt-1 text-[#b8552d]"></i> Faster response on text requests</li>
           </ul>
         </div>
-      </div>
-      <p class="hero-video-note">Lake Brownwood · customer boat repaired by Andrew's Marine</p>
-    </section>
-
-    <section class="trust-bar" aria-label="What we do">
-      <div class="wrap trust-grid">
-        <div class="trust-item"><h2>Outboard &amp; PWC Repair</h2><p>Diagnosis, repair, and routine service.</p></div>
-        <div class="trust-item"><h2>Winterization</h2><p>Seasonal prep to protect your boat before it sits.</p></div>
-        <div class="trust-item"><h2>Canvas &amp; Upholstery</h2><p>Seats, covers, and tops built for Texas summers.</p></div>
-        <div class="trust-item"><h2>Marine Audio</h2><p>Wetsound products and clean installations.</p></div>
-      </div>
-    </section>
-
-    <div class="wave-rule" role="presentation"></div>
-
-    <section class="services" id="services">
-      <div class="wrap">
-        <h2 class="section-title">What we fix</h2>
-        <div class="services-grid">
-          <article class="service-card span-3"><h3>Outboard Engine Repair &amp; Service</h3><p>Won't start, running rough, or due for service? We diagnose the problem, explain what it needs, and get to work.</p></article>
-          <article class="service-card span-3"><h3>Propeller Repair</h3><p>Bent, dinged, and spun props repaired. If replacement makes more sense, we can help match the right ACME propeller.</p></article>
-          <article class="service-card span-2"><h3>PWC &amp; Jet Ski Service</h3><p>Tune-ups, no-starts, drivability problems, and routine maintenance for personal watercraft.</p></article>
-          <article class="service-card span-2"><h3>Winterization &amp; Seasonal Prep</h3><p>Off-season protection and seasonal service to help boats, PWCs, and pontoons stay ready for the next stretch on the water.</p></article>
-          <article class="service-card span-2"><h3>Canvas &amp; Upholstery</h3><p>Repairs and replacement work for seats, covers, and bimini tops.</p></article>
-          <article class="service-card span-2"><h3>Marine Stereo &amp; Electronics</h3><p>Wetsound marine audio, aftermarket stereo, and electronics installed cleanly and wired correctly.</p></article>
-          <article class="service-card span-2"><h3>Parts &amp; Gear</h3><p>Looking for a specific part? Call or text the shop before you drive over and Andrew can tell you whether it is available or needs to be ordered.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="rush" id="rush">
-      <div class="wrap rush-inner">
-        <h2 class="section-title">Heading into a holiday weekend?</h2>
-        <p class="rush-lede">Lake shops get busy fast. The best move is to reach out early and give us enough information to understand the problem.</p>
-        <ol class="rush-list">
-          <li><h3>Get in the queue early</h3><p>Memorial Day, July 4th, and Labor Day can fill the schedule quickly. Use the service request below before the rush builds.</p></li>
-          <li><h3>Get a straight answer</h3><p>Call or text the shop and we will tell you what information we need and what the next practical step looks like.</p></li>
-          <li><h3>Think seasonally</h3><p>When the weather turns, winterization and off-season service can save time, stress, and repair work later.</p></li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="membership" id="membership">
-      <div class="wrap">
-        <div class="membership-box">
-          <h2>Priority membership</h2>
-          <p>Andrew's Marine offers a membership program with priority service and member discounts. Ask at the counter, call, or text the shop for current details.</p>
-          <a href="sms:+13253202018?body=Hi%20Andrew%2C%20I%27d%20like%20more%20information%20about%20the%20priority%20membership." class="btn btn-outline">Ask About Membership</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="work" id="work">
-      <div class="wrap">
-        <h2 class="section-title">On the water and at the shop</h2>
-        <div class="work-grid">
-          <figure class="work-photo wide"><img src="images/pwc-lake.jpg" alt="Two riders on PWCs idling through shallow water on the lake" loading="lazy"></figure>
-        </div>
-        <p class="hours-note">Repair work, parts, and marine gear are available through the storefront at 7855 TX-279. Winterization is also a visible part of the current work mix and should remain represented throughout the site. Additional project photos can be added with Andrew's approval.</p>
-      </div>
-    </section>
-
-    <div class="wave-rule" role="presentation"></div>
-
-    <section class="reviews" id="reviews">
-      <div class="wrap">
-        <h2 class="section-title">See what Lake Brownwood boaters are saying</h2>
-        <p class="rush-lede">Customer feedback currently lives on Google and Facebook. Use the links below to review the latest public recommendations.</p>
-        <div class="reviews-links">
-          <a class="btn btn-outline" href="https://www.facebook.com/andrewsmarinemaintenanceandrepair" target="_blank" rel="noopener">Find Us on Facebook</a>
-          <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&amp;query=Andrew%27s%20Marine%20Maintenance%20and%20Repair%207855%20TX-279%20Brownwood%20TX" target="_blank" rel="noopener">Read Google Reviews</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="hours" id="hours">
-      <div class="wrap hours-grid">
-        <div class="hours-block">
-          <h2 class="section-title">Hours</h2>
-          <p class="hours-line">Monday - Friday, 8am - 5pm</p>
-          <p class="hours-note">If the shop cannot answer immediately, send a text with your name, boat or PWC, and what is happening.</p>
-        </div>
-        <div class="location-block">
-          <h2 class="section-title">The shop</h2>
-          <p class="hours-line">7855 TX-279<br>Brownwood, TX 76801</p>
-          <p class="hours-note">Storefront with parts and gear in stock. Serving Lake Brownwood and Brown County.</p>
-          <a class="btn btn-outline" href="https://www.google.com/maps/search/?api=1&amp;query=7855%20TX-279%20Brownwood%20TX%2076801" target="_blank" rel="noopener">Get Directions</a>
-        </div>
-      </div>
-    </section>
-
-    <div class="wave-rule" role="presentation"></div>
-
-    <section class="request" id="request">
-      <div class="wrap request-inner">
-        <h2 class="section-title">Request service</h2>
-        <p class="form-promise"><strong>Demo preview:</strong> this form is not connected yet. After launch, requests can be delivered directly to Andrew by email or text.</p>
-        <form id="service-form" novalidate>
-          <div class="field">
-            <label for="f-name">Name</label>
-            <input type="text" id="f-name" name="name" autocomplete="name" required>
-            <p class="field-error" id="f-name-error" hidden>Please tell us your name.</p>
+        <div class="border border-[#e5e0d5] rounded-3xl p-6 flex flex-col">
+          <div class="flex-1">
+            <div class="font-semibold mb-2">Want to join?</div>
+            <p class="text-sm text-[#4a5248]">Just let us know. We’ll go over the details and get you set up.</p>
           </div>
-          <div class="field">
-            <label for="f-phone">Phone</label>
-            <input type="tel" id="f-phone" name="phone" autocomplete="tel" required>
-            <p class="field-error" id="f-phone-error" hidden>Please add a phone number.</p>
-          </div>
-          <div class="field">
-            <label for="f-issue">What do you need help with? <span class="optional">(optional)</span></label>
-            <select id="f-issue" name="issue">
-              <option value="" selected>Choose one if you know</option>
-              <option>Won't start</option>
-              <option>Running rough</option>
-              <option>Prop damage</option>
-              <option>Winterization</option>
-              <option>Stereo or electronics</option>
-              <option>Canvas or upholstery</option>
-              <option>Parts inquiry</option>
-              <option>Membership information</option>
-              <option>Something else</option>
-            </select>
-          </div>
-          <button type="submit" class="btn btn-primary btn-wide">Preview Request</button>
-          <p class="form-success" id="form-success" hidden>Demo complete. No information was sent. In the live site, this request would go directly to Andrew.</p>
-        </form>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="wrap footer-grid">
-      <div>
-        <p class="footer-wordmark">Andrew's Marine Maintenance &amp; Repair, LLC</p>
-        <p>Serving Lake Brownwood and Brown County.</p>
-      </div>
-      <div>
-        <p><a href="tel:+13253202018">(325) 320-2018</a></p>
-        <p><a href="sms:+13253202018">Text the Shop</a></p>
-        <p><a href="mailto:Info@andrewsmarine.net">Info@andrewsmarine.net</a></p>
-        <p class="footer-address">7855 TX-279, Brownwood, TX 76801</p>
+          <a href="sms:3253202018?body=Hi%20Andrew%2C%20I%27d%20like%20more%20information%20about%20the%20priority%20membership." 
+             class="mt-6 inline-block text-center px-6 py-3 bg-[#1f3a32] text-white rounded-2xl text-sm font-medium">
+            Ask About Membership
+          </a>
+        </div>
       </div>
     </div>
-    <div class="wrap footer-credit">
-      <p>Private site concept by <a href="https://agaviai.com" target="_blank" rel="noopener">Agavi AI · agaviai.com</a></p>
+  </div>
+
+  <!-- CONTACT / FORM -->
+  <div id="contact" class="max-w-screen-xl mx-auto px-6 py-20">
+    <div class="max-w-2xl mx-auto">
+      <div class="text-center mb-10">
+        <div class="text-xs tracking-[2px] text-[#b8552d] font-medium">LET’S GET STARTED</div>
+        <h2 class="section-header mt-3">Request Service</h2>
+        <p class="mt-3 text-[#4a5248]">Tell us what’s going on with your boat. We’ll get back to you quickly.</p>
+      </div>
+
+      <!-- FORM -->
+      <form id="serviceForm" class="bg-white border border-[#e5e0d5] rounded-3xl p-8 space-y-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label class="text-xs font-medium text-[#6a6f64] block mb-1.5">YOUR NAME</label>
+            <input type="text" id="name" required class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
+          </div>
+          <div>
+            <label class="text-xs font-medium text-[#6a6f64] block mb-1.5">PHONE NUMBER</label>
+            <input type="tel" id="phone" required class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
+          </div>
+        </div>
+
+        <div>
+          <label class="text-xs font-medium text-[#6a6f64] block mb-1.5">WHAT DO YOU NEED HELP WITH?</label>
+          <select id="serviceType" class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
+            <option>Outboard / PWC Repair</option>
+            <option>Winterization</option>
+            <option>Propeller Repair</option>
+            <option>Canvas / Upholstery</option>
+            <option>Marine Audio / Electronics</option>
+            <option>Parts Inquiry</option>
+            <option>Other / Not sure</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="text-xs font-medium text-[#6a6f64] block mb-1.5">TELL US MORE (OPTIONAL)</label>
+          <textarea id="message" rows="4" placeholder="What's happening with the boat? Any symptoms or recent work?" 
+                    class="w-full border border-[#d1c9b8] rounded-3xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]"></textarea>
+        </div>
+
+        <button type="submit" 
+                class="w-full bg-[#1f3a32] hover:bg-[#2a4a40] transition-colors text-white font-semibold py-4 rounded-3xl text-sm tracking-wider">
+          SEND REQUEST TO ANDREW
+        </button>
+        
+        <p class="text-center text-xs text-[#6a6f64]">We usually respond within a few hours during business days.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-[#e5e0d5] bg-white">
+    <div class="max-w-screen-xl mx-auto px-6 py-12 text-sm">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-y-6">
+        <div>
+          <div class="font-semibold">Andrew's Marine Maintenance &amp; Repair</div>
+          <div class="text-[#6a6f64] mt-1">Lake Brownwood, Texas</div>
+        </div>
+        
+        <div class="flex flex-wrap gap-x-8 gap-y-2 text-[#4a5248]">
+          <a href="tel:3253202018" class="hover:text-[#1f3a32]">325-320-2018</a>
+          <a href="sms:3253202018" class="hover:text-[#1f3a32]">Text Us</a>
+          <a href="https://www.google.com/maps/search/?api=1&query=7855+TX-279+Brownwood+TX" target="_blank" class="hover:text-[#1f3a32]">Get Directions</a>
+        </div>
+      </div>
+      
+      <div class="text-[10px] text-[#9a9d92] mt-10">
+        This is a working concept. Final details, photos, and membership information will be confirmed with Andrew before launch.
+      </div>
     </div>
   </footer>
 
-  <div class="mobile-bar" role="navigation" aria-label="Quick actions">
-    <a href="tel:+13253202018" class="btn btn-primary">Call</a>
-    <a href="sms:+13253202018" class="btn btn-ghost-dark">Text</a>
-    <a href="#request" class="btn btn-ghost-dark">Request</a>
-  </div>
+  <script>
+    // Tailwind script
+    function initializeTailwind() {
+      document.documentElement.style.setProperty('--accent', '#b8552d');
+    }
 
-  <script src="app.js" defer></script>
+    // Form handling
+    document.getElementById('serviceForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const btn = this.querySelector('button');
+      const originalText = btn.innerHTML;
+      
+      btn.innerHTML = 'SENDING...';
+      btn.disabled = true;
+      
+      // Simulate sending (in real version this would connect to n8n/email)
+      setTimeout(() => {
+        btn.innerHTML = 'REQUEST RECEIVED ✓';
+        btn.classList.remove('bg-[#1f3a32]');
+        btn.classList.add('bg-green-600');
+        
+        setTimeout(() => {
+          alert("Thanks! Andrew will get back to you shortly. (In production, this would send a structured message to Andrew)");
+          this.reset();
+          btn.innerHTML = originalText;
+          btn.disabled = false;
+          btn.classList.add('bg-[#1f3a32]');
+          btn.classList.remove('bg-green-600');
+        }, 1800);
+      }, 1200);
+    });
+
+    // Initialize
+    initializeTailwind();
+  </script>
 </body>
 </html>
