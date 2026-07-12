@@ -53,7 +53,7 @@
   if (heroVideo) {
     heroVideo.removeAttribute("poster");
     heroVideo.preload = "auto";
-    heroVideo.src = "images/images:hero-lake-brownwood.mp4";
+    heroVideo.src = "images/hero-lake-brownwood.mp4";
     function revealVideo() { heroVideo.classList.add("is-ready"); }
     heroVideo.addEventListener("loadeddata", revealVideo, { once: true });
     heroVideo.addEventListener("canplay", revealVideo, { once: true });
