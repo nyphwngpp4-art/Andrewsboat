@@ -71,14 +71,14 @@
 
   <!-- NAV -->
   <nav class="bg-white border-b border-[#e5e0d5] sticky top-0 z-50">
-    <div class="max-w-screen-xl mx-auto px-6 py-5 flex items-center justify-between">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 py-5 flex items-center justify-between">
       <div class="flex items-center gap-x-3">
         <div class="w-9 h-9 bg-[#1f3a32] rounded-2xl flex items-center justify-center">
           <span class="text-white font-bold text-xl tracking-tighter">AM</span>
         </div>
         <div>
-          <div class="font-semibold text-xl tracking-tight">Andrew's Marine</div>
-          <div class="text-[10px] text-[#6a6f64] -mt-1">Lake Brownwood</div>
+          <div class="font-semibold text-lg sm:text-xl tracking-tight">Andrew's Marine</div>
+          <div class="hidden sm:block text-[10px] text-[#6a6f64] -mt-1">Lake Brownwood</div>
         </div>
       </div>
       
@@ -88,15 +88,27 @@
         <a href="#contact" class="hover:text-[#1f3a32] transition-colors">Contact</a>
       </div>
 
-      <div class="flex items-center gap-x-3">
-        <a href="tel:+13253202018" 
-           class="px-5 py-2.5 text-sm font-medium border border-[#d1c9b8] rounded-3xl hover:bg-white transition-colors flex items-center gap-x-2">
+      <div class="flex items-center gap-x-2 sm:gap-x-3">
+        <a href="tel:+13253202018"
+           aria-label="Call Andrew's Marine"
+           title="Call Andrew's Marine"
+           class="px-3 sm:px-5 py-2.5 text-sm font-medium border border-[#d1c9b8] rounded-3xl hover:bg-[#f8f5f0] transition-colors flex items-center gap-x-2">
           <i class="fa-solid fa-phone text-[#b8552d]"></i>
           <span class="hidden sm:inline">Call</span>
         </a>
-        <a href="#contact" 
-           class="px-6 py-2.5 bg-[#1f3a32] text-white text-sm font-semibold rounded-3xl hover:bg-[#2a4a40] transition-colors">
-          Request Service
+        <a href="#contact"
+           data-text-intake
+           aria-label="Start a text request"
+           title="Start a text request"
+           class="px-3 sm:px-5 py-2.5 text-sm font-medium border border-[#d1c9b8] rounded-3xl hover:bg-[#f8f5f0] transition-colors flex items-center gap-x-2">
+          <i class="fa-solid fa-comment-dots text-[#b8552d]"></i>
+          <span class="hidden sm:inline">Text</span>
+        </a>
+        <a href="#contact"
+           aria-label="Request service"
+           class="px-3 sm:px-6 py-2.5 bg-[#1f3a32] text-white text-sm font-semibold rounded-3xl hover:bg-[#2a4a40] transition-colors flex items-center gap-x-2">
+          <i class="fa-solid fa-clipboard-list"></i>
+          <span class="hidden sm:inline">Request Service</span>
         </a>
       </div>
     </div>
@@ -133,7 +145,8 @@
             <i class="fa-solid fa-arrow-right"></i>
           </a>
           
-          <a href="sms:+13253202018" 
+          <a href="#contact"
+             data-text-intake
              class="px-7 py-4 border border-white/70 text-white hover:bg-white/10 transition-all font-medium rounded-3xl text-sm flex items-center gap-x-3 backdrop-blur-sm">
             <i class="fa-solid fa-comment-dots"></i>
             <span>Text the Shop</span>
@@ -173,7 +186,6 @@
       </div>
 
       <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5">
-        <!-- Pillar 1 -->
         <div class="bg-[#f8f5f0] border border-[#e5e0d5] rounded-3xl p-7">
           <div class="w-11 h-11 rounded-2xl bg-[#b8552d]/10 flex items-center justify-center mb-5">
             <i class="fa-solid fa-bolt text-xl text-[#b8552d]"></i>
@@ -187,7 +199,6 @@
           </ul>
         </div>
 
-        <!-- Pillar 2 -->
         <div class="bg-[#f8f5f0] border border-[#e5e0d5] rounded-3xl p-7">
           <div class="w-11 h-11 rounded-2xl bg-[#b8552d]/10 flex items-center justify-center mb-5">
             <i class="fa-solid fa-screwdriver-wrench text-xl text-[#b8552d]"></i>
@@ -201,7 +212,6 @@
           </ul>
         </div>
 
-        <!-- Pillar 3 -->
         <div class="bg-[#f8f5f0] border border-[#e5e0d5] rounded-3xl p-7">
           <div class="w-11 h-11 rounded-2xl bg-[#b8552d]/10 flex items-center justify-center mb-5">
             <i class="fa-solid fa-tags text-xl text-[#b8552d]"></i>
@@ -214,7 +224,6 @@
         </div>
       </div>
 
-      <!-- CTA: inquiry gate, no price shown -->
       <div class="mt-8">
         <a href="#contact" data-prefill-service="Platinum Service Customer"
            class="w-full sm:w-auto inline-flex items-center justify-center gap-x-3 px-8 py-4 bg-[#1f3a32] hover:bg-[#2a4a40] transition-colors text-white font-semibold rounded-3xl text-sm tracking-wider">
@@ -342,47 +351,54 @@
       <div class="text-center mb-10">
         <div class="text-xs tracking-[2px] text-[#b8552d] font-medium">LET’S GET STARTED</div>
         <h2 class="text-4xl font-semibold tracking-tight mt-3">Request Service</h2>
-        <p class="mt-3 text-[#4a5248]">Tell us what’s going on with your boat. We’ll get back to you quickly.</p>
+        <p class="mt-3 text-[#4a5248]">Share a few details. We’ll build a text message you can review and send directly to Andrew.</p>
       </div>
 
       <form id="serviceForm" class="bg-white border border-[#e5e0d5] rounded-3xl p-8 space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
-            <label class="text-xs font-medium text-[#6a6f64] block mb-1.5">YOUR NAME</label>
-            <input type="text" id="name" required class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
+            <label for="name" class="text-xs font-medium text-[#6a6f64] block mb-1.5">YOUR NAME</label>
+            <input type="text" id="name" name="name" required class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
           </div>
           <div>
-            <label class="text-xs font-medium text-[#6a6f64] block mb-1.5">PHONE NUMBER</label>
-            <input type="tel" id="phone" required class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
+            <label for="phone" class="text-xs font-medium text-[#6a6f64] block mb-1.5">PHONE NUMBER</label>
+            <input type="tel" id="phone" name="phone" required class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label for="unitYear" class="text-xs font-medium text-[#6a6f64] block mb-1.5">BOAT / PWC YEAR</label>
+            <input type="number" id="unitYear" name="unitYear" min="1900" max="2027" placeholder="Example: 2018" required class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
+          </div>
+          <div>
+            <label for="serviceType" class="text-xs font-medium text-[#6a6f64] block mb-1.5">WHAT DO YOU NEED HELP WITH?</label>
+            <select id="serviceType" name="serviceType" class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
+              <option>Platinum Service Customer</option>
+              <option>Outboard / PWC Repair</option>
+              <option>Winterization</option>
+              <option>Propeller Repair</option>
+              <option>Canvas / Upholstery</option>
+              <option>Marine Audio / Electronics</option>
+              <option>Parts Inquiry</option>
+              <option>Other / Not sure</option>
+            </select>
           </div>
         </div>
 
         <div>
-          <label class="text-xs font-medium text-[#6a6f64] block mb-1.5">WHAT DO YOU NEED HELP WITH?</label>
-          <select id="serviceType" class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
-            <option>Platinum Service Customer</option>
-            <option>Outboard / PWC Repair</option>
-            <option>Winterization</option>
-            <option>Propeller Repair</option>
-            <option>Canvas / Upholstery</option>
-            <option>Marine Audio / Electronics</option>
-            <option>Parts Inquiry</option>
-            <option>Other / Not sure</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="text-xs font-medium text-[#6a6f64] block mb-1.5">TELL US MORE</label>
-          <textarea id="message" rows="4" placeholder="What's happening with the boat? Any symptoms or recent work?" 
+          <label for="message" class="text-xs font-medium text-[#6a6f64] block mb-1.5">TELL US MORE</label>
+          <textarea id="message" name="message" rows="4" placeholder="What's happening with the boat? Any symptoms or recent work?"
                     class="w-full border border-[#d1c9b8] rounded-3xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]"></textarea>
         </div>
 
-        <button type="submit" 
-                class="w-full bg-[#1f3a32] hover:bg-[#2a4a40] transition-colors text-white font-semibold py-4 rounded-3xl text-sm tracking-wider">
-          SEND REQUEST TO ANDREW
+        <button type="submit"
+                class="w-full bg-[#1f3a32] hover:bg-[#2a4a40] transition-colors text-white font-semibold py-4 rounded-3xl text-sm tracking-wider flex items-center justify-center gap-x-3">
+          <i class="fa-solid fa-comment-dots"></i>
+          OPEN TEXT TO ANDREW
         </button>
         
-        <p class="text-center text-xs text-[#6a6f64]">We usually respond within a few hours during business days.</p>
+        <p class="text-center text-xs text-[#6a6f64]">This opens your messaging app with the details above. Review the message, then tap Send.</p>
       </form>
     </div>
   </div>
@@ -412,7 +428,7 @@
           <div class="text-[#b8552d] text-xs tracking-[2px] font-medium mb-3">GET IN TOUCH</div>
           <div class="flex flex-col gap-y-2 text-[#4a5248]">
             <a href="tel:+13253202018" class="hover:text-[#1f3a32]">325-320-2018</a>
-            <a href="sms:+13253202018" class="hover:text-[#1f3a32]">Text the Shop</a>
+            <a href="#contact" data-text-intake class="hover:text-[#1f3a32]">Start a Text Request</a>
             <a href="https://www.google.com/maps/search/?api=1&query=7855+Hwy+279+Brownwood+TX+76801" target="_blank" class="hover:text-[#1f3a32]">Get Directions</a>
           </div>
         </div>
@@ -441,30 +457,39 @@
       });
     });
 
-    // Form handling
-    document.getElementById('serviceForm').addEventListener('submit', function(e) {
+    // Text CTAs route through the structured intake and focus the first field
+    document.querySelectorAll('[data-text-intake]').forEach(function (el) {
+      el.addEventListener('click', function () {
+        window.setTimeout(function () {
+          var nameField = document.getElementById('name');
+          if (nameField) nameField.focus({ preventScroll: true });
+        }, 450);
+      });
+    });
+
+    // Build a structured SMS in the customer's messaging app
+    document.getElementById('serviceForm').addEventListener('submit', function (e) {
       e.preventDefault();
-      
-      const btn = this.querySelector('button');
-      const originalText = btn.innerHTML;
-      
-      btn.innerHTML = 'SENDING...';
-      btn.disabled = true;
-      
-      setTimeout(() => {
-        btn.innerHTML = 'REQUEST RECEIVED ✓';
-        btn.classList.remove('bg-[#1f3a32]');
-        btn.classList.add('bg-green-600');
-        
-        setTimeout(() => {
-          alert("Thanks! This would send a structured message to Andrew in production.");
-          this.reset();
-          btn.innerHTML = originalText;
-          btn.disabled = false;
-          btn.classList.add('bg-[#1f3a32]');
-          btn.classList.remove('bg-green-600');
-        }, 1600);
-      }, 1100);
+
+      var name = document.getElementById('name').value.trim();
+      var phone = document.getElementById('phone').value.trim();
+      var unitYear = document.getElementById('unitYear').value.trim();
+      var serviceType = document.getElementById('serviceType').value;
+      var details = document.getElementById('message').value.trim() || 'No additional details provided.';
+
+      var body = [
+        "Hi Andrew, I'd like to request service.",
+        "",
+        "Name: " + name,
+        "Phone: " + phone,
+        "Boat/PWC year: " + unitYear,
+        "Service needed: " + serviceType,
+        "Details: " + details
+      ].join("\n");
+
+      var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      var separator = isIOS ? '&' : '?';
+      window.location.href = 'sms:+13253202018' + separator + 'body=' + encodeURIComponent(body);
     });
   </script>
 </body>
