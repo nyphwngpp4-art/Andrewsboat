@@ -7,14 +7,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <style>
-    html {
-      scroll-padding-top: 6rem;
-    }
+    html { scroll-padding-top: 6rem; }
+    body { font-family: 'Inter', system_ui, sans-serif; }
 
-    body {
-      font-family: 'Inter', system_ui, sans-serif;
-    }
-    
     .heading-serif {
       font-family: 'Playfair Display', Georgia, serif;
       font-weight: 700;
@@ -33,8 +28,7 @@
 
     .cinematic-hero video {
       position: absolute;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -53,7 +47,7 @@
       );
       z-index: 2;
     }
-    
+
     .hero-content {
       position: relative;
       z-index: 3;
@@ -62,7 +56,7 @@
     .service-card {
       transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    
+
     .service-card:hover {
       transform: translateY(-4px);
       box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
@@ -83,7 +77,7 @@
           <div class="hidden sm:block text-[10px] text-[#6a6f64] -mt-1">Lake Brownwood</div>
         </div>
       </div>
-      
+
       <div class="hidden md:flex items-center gap-x-8 text-sm">
         <a href="#platinum" class="hover:text-[#1f3a32] transition-colors">Platinum</a>
         <a href="#services" class="hover:text-[#1f3a32] transition-colors">Services</a>
@@ -121,7 +115,7 @@
     <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="images/hero-poster.jpg" class="w-full h-full object-cover">
       <source src="images/hero-lake-brownwood.mp4" type="video/mp4">
     </video>
-    
+
     <div class="hero-overlay"></div>
 
     <div class="max-w-screen-xl mx-auto px-6 relative z-10">
@@ -129,24 +123,24 @@
         <div class="inline-flex items-center gap-x-2 bg-white/90 px-4 py-1.5 rounded-3xl text-xs font-medium tracking-[2px] mb-6 text-[#1f3a32]">
           LAKE BROWNWOOD, TEXAS
         </div>
-        
+
         <h1 class="text-white text-6xl md:text-7xl leading-[1.02] tracking-[-3.5px] font-semibold">
           Boat down?<br>
           <span class="text-[#f4d9c8]">Let’s get you back on the water.</span>
         </h1>
-        
+
         <p class="mt-6 max-w-md text-lg text-white/90">
-          Real repair. Real parts. Real people. 
-          A local shop that actually shows up when you need help.
+          Real repair. Real parts. Real people.<br>
+          Local marine repair, parts, and service for Lake Brownwood.
         </p>
 
         <div class="flex flex-wrap items-center gap-x-4 gap-y-3 mt-9">
-          <a href="#contact" 
+          <a href="#contact"
              class="px-9 py-4 bg-white text-[#1f3a32] font-semibold rounded-3xl text-sm tracking-wider hover:bg-[#f8f5f0] transition-all flex items-center gap-x-3 shadow-xl">
             REQUEST SERVICE
             <i class="fa-solid fa-arrow-right"></i>
           </a>
-          
+
           <a href="#contact"
              data-text-intake
              class="px-7 py-4 border border-white/70 text-white hover:bg-white/10 transition-all font-medium rounded-3xl text-sm flex items-center gap-x-3 backdrop-blur-sm">
@@ -250,17 +244,17 @@
       <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
         <div class="flex items-center gap-x-3 mb-4">
           <i class="fa-solid fa-tools text-2xl text-[#b8552d]"></i>
-          <h3 class="font-semibold text-xl">Outboard &amp; PWC Repair</h3>
+          <h3 class="font-semibold text-xl">Boat &amp; PWC Repair</h3>
         </div>
-        <p class="text-[#4a5248]">Won't start, running rough, or due for service? We diagnose the problem, explain what it needs, and get it done right.</p>
+        <p class="text-[#4a5248]">Inboard, sterndrive, outboard, and personal watercraft diagnostics, maintenance, and repair.</p>
       </div>
 
       <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
         <div class="flex items-center gap-x-3 mb-4">
           <i class="fa-solid fa-sync text-2xl text-[#b8552d]"></i>
-          <h3 class="font-semibold text-xl">Winterization &amp; Storage</h3>
+          <h3 class="font-semibold text-xl">Winterization &amp; Seasonal Service</h3>
         </div>
-        <p class="text-[#4a5248]">Proper winterization so your boat is ready when the season starts again.</p>
+        <p class="text-[#4a5248]">Proper winterization and seasonal maintenance so your boat is ready when you are.</p>
       </div>
 
       <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
@@ -299,9 +293,7 @@
 
   <!--
     SHOP POLICIES: verified from on-site photos. Specific dollar/percent
-    figures (labor rate, service-call fee, restocking %, daily storage fee)
-    are intentionally WITHHELD from rendered copy to honor the "no price
-    appears anywhere on the page" rule. Ready to add on Andrew's OK.
+    figures are withheld from rendered copy pending Andrew's approval.
   -->
   <div id="policies" class="max-w-screen-xl mx-auto px-6 py-16 border-t border-[#e5e0d5]">
     <div class="max-w-2xl mb-8">
@@ -377,8 +369,8 @@
             <label for="serviceType" class="text-xs font-medium text-[#6a6f64] block mb-1.5">WHAT DO YOU NEED HELP WITH?</label>
             <select id="serviceType" name="serviceType" class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
               <option>Platinum Service Customer</option>
-              <option>Outboard / PWC Repair</option>
-              <option>Winterization</option>
+              <option>Boat / PWC Repair</option>
+              <option>Winterization / Seasonal Service</option>
               <option>Propeller Repair</option>
               <option>Canvas / Upholstery</option>
               <option>Marine Audio / Electronics</option>
@@ -399,7 +391,7 @@
           <i class="fa-solid fa-comment-dots"></i>
           OPEN TEXT TO ANDREW
         </button>
-        
+
         <p class="text-center text-xs text-[#6a6f64]">This opens your messaging app with the details above. Review the message, then tap Send.</p>
       </form>
     </div>
@@ -444,14 +436,11 @@
 
   <script>
     // Hero background video: force muted autoplay across desktop and mobile.
-    // Mobile browsers load video lazily and reject the first play() call even
-    // for valid videos, so we do NOT hide the video on slow loads or on a
-    // play() rejection. The poster image behind it shows meanwhile. We only
-    // fall back to the poster on a genuine media error.
+    // The poster remains visible while the video loads and on genuine media errors.
     (function () {
       var video = document.querySelector('.cinematic-hero video');
       if (!video) return;
-      // Muted + inline are required for autoplay on iOS/Android.
+
       video.muted = true;
       video.defaultMuted = true;
       video.playsInline = true;
@@ -459,47 +448,52 @@
 
       function attemptPlay() {
         var p = video.play();
-        if (p && typeof p.catch === 'function') p.catch(function () { /* keep trying below */ });
+        if (p && typeof p.catch === 'function') p.catch(function () {});
       }
-      function revealPoster() { video.style.display = 'none'; } // genuine failure only
+
+      function revealPoster() {
+        video.style.display = 'none';
+      }
 
       video.addEventListener('loadedmetadata', attemptPlay);
       video.addEventListener('loadeddata', attemptPlay);
       video.addEventListener('canplay', attemptPlay);
       video.addEventListener('error', revealPoster);
+
       var source = video.querySelector('source');
       if (source) source.addEventListener('error', revealPoster);
 
       try { video.load(); } catch (e) {}
       attemptPlay();
 
-      // Last resort for mobile (iOS Low Power / Low Data Mode block autoplay):
-      // start the video on the first user interaction, then stop listening.
       function kickstart() {
         attemptPlay();
         window.removeEventListener('touchstart', kickstart);
         window.removeEventListener('click', kickstart);
         window.removeEventListener('scroll', kickstart);
       }
+
       window.addEventListener('touchstart', kickstart, { passive: true });
       window.addEventListener('click', kickstart);
       window.addEventListener('scroll', kickstart, { passive: true });
 
-      // Resume if the tab was backgrounded during load.
       document.addEventListener('visibilitychange', function () {
         if (!document.hidden) attemptPlay();
       });
     })();
 
-    // Platinum CTA -> prefill/tag the contact form as a Platinum inquiry
+    // Platinum CTA -> prefill/tag the contact form as a Platinum inquiry.
     document.querySelectorAll('[data-prefill-service]').forEach(function (el) {
       el.addEventListener('click', function () {
         var val = el.getAttribute('data-prefill-service');
         var select = document.getElementById('serviceType');
         if (select) {
-          var match = Array.prototype.find.call(select.options, function (o) { return o.value === val || o.text === val; });
+          var match = Array.prototype.find.call(select.options, function (o) {
+            return o.value === val || o.text === val;
+          });
           if (match) select.value = match.value;
         }
+
         var message = document.getElementById('message');
         if (message && !message.value) {
           message.value = "I'd like to learn more about the Platinum Service Customer program.";
@@ -507,7 +501,7 @@
       });
     });
 
-    // Text CTAs route through the structured intake and focus the first field
+    // Text CTAs route through the structured intake and focus the first field.
     document.querySelectorAll('[data-text-intake]').forEach(function (el) {
       el.addEventListener('click', function () {
         window.setTimeout(function () {
@@ -517,7 +511,7 @@
       });
     });
 
-    // Build a structured SMS in the customer's messaging app
+    // Build a structured SMS in the customer's messaging app.
     document.getElementById('serviceForm').addEventListener('submit', function (e) {
       e.preventDefault();
 
