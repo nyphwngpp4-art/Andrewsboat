@@ -443,35 +443,51 @@
   </footer>
 
   <script>
-    // Hero background video: force muted autoplay; if it cannot play (autoplay
-    // blocked, source missing, or unsupported), hide the video so the poster
-    // image behind it shows cleanly instead of a stuck play button.
+    // Hero background video: force muted autoplay across desktop and mobile.
+    // Mobile browsers load video lazily and reject the first play() call even
+    // for valid videos, so we do NOT hide the video on slow loads or on a
+    // play() rejection. The poster image behind it shows meanwhile. We only
+    // fall back to the poster on a genuine media error.
     (function () {
       var video = document.querySelector('.cinematic-hero video');
       if (!video) return;
+      // Muted + inline are required for autoplay on iOS/Android.
       video.muted = true;
+      video.defaultMuted = true;
       video.playsInline = true;
+      video.setAttribute('muted', '');
 
-      function revealPoster() { video.style.display = 'none'; }
       function attemptPlay() {
         var p = video.play();
-        if (p && typeof p.catch === 'function') p.catch(function () { revealPoster(); });
+        if (p && typeof p.catch === 'function') p.catch(function () { /* keep trying below */ });
       }
+      function revealPoster() { video.style.display = 'none'; } // genuine failure only
 
+      video.addEventListener('loadedmetadata', attemptPlay);
       video.addEventListener('loadeddata', attemptPlay);
       video.addEventListener('canplay', attemptPlay);
       video.addEventListener('error', revealPoster);
       var source = video.querySelector('source');
       if (source) source.addEventListener('error', revealPoster);
 
+      try { video.load(); } catch (e) {}
       attemptPlay();
 
-      // Backstop: if nothing has loaded after a few seconds, show the poster.
-      setTimeout(function () { if (video.readyState < 2) revealPoster(); }, 6000);
+      // Last resort for mobile (iOS Low Power / Low Data Mode block autoplay):
+      // start the video on the first user interaction, then stop listening.
+      function kickstart() {
+        attemptPlay();
+        window.removeEventListener('touchstart', kickstart);
+        window.removeEventListener('click', kickstart);
+        window.removeEventListener('scroll', kickstart);
+      }
+      window.addEventListener('touchstart', kickstart, { passive: true });
+      window.addEventListener('click', kickstart);
+      window.addEventListener('scroll', kickstart, { passive: true });
 
       // Resume if the tab was backgrounded during load.
       document.addEventListener('visibilitychange', function () {
-        if (!document.hidden && video.style.display !== 'none') attemptPlay();
+        if (!document.hidden) attemptPlay();
       });
     })();
 
