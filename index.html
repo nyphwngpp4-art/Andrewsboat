@@ -28,8 +28,9 @@
       display: flex;
       align-items: center;
       overflow: hidden;
+      background: #0c1a17 url("images/hero-poster.jpg") center center / cover no-repeat;
     }
-    
+
     .cinematic-hero video {
       position: absolute;
       top: 0;
@@ -39,14 +40,15 @@
       object-fit: cover;
       z-index: 1;
     }
-    
+
     .hero-overlay {
       position: absolute;
       inset: 0;
+      pointer-events: none;
       background: linear-gradient(
-        to bottom, 
-        rgba(15, 23, 42, 0.42) 0%, 
-        rgba(15, 23, 42, 0.58) 45%, 
+        to bottom,
+        rgba(15, 23, 42, 0.42) 0%,
+        rgba(15, 23, 42, 0.58) 45%,
         rgba(15, 23, 42, 0.68) 100%
       );
       z-index: 2;
@@ -116,7 +118,7 @@
 
   <!-- CINEMATIC HERO -->
   <div class="cinematic-hero">
-    <video autoplay muted loop playsinline preload="auto" poster="images/hero-poster.jpg" class="w-full h-full object-cover">
+    <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="images/hero-poster.jpg" class="w-full h-full object-cover">
       <source src="images/hero-lake-brownwood.mp4" type="video/mp4">
     </video>
     
@@ -441,6 +443,38 @@
   </footer>
 
   <script>
+    // Hero background video: force muted autoplay; if it cannot play (autoplay
+    // blocked, source missing, or unsupported), hide the video so the poster
+    // image behind it shows cleanly instead of a stuck play button.
+    (function () {
+      var video = document.querySelector('.cinematic-hero video');
+      if (!video) return;
+      video.muted = true;
+      video.playsInline = true;
+
+      function revealPoster() { video.style.display = 'none'; }
+      function attemptPlay() {
+        var p = video.play();
+        if (p && typeof p.catch === 'function') p.catch(function () { revealPoster(); });
+      }
+
+      video.addEventListener('loadeddata', attemptPlay);
+      video.addEventListener('canplay', attemptPlay);
+      video.addEventListener('error', revealPoster);
+      var source = video.querySelector('source');
+      if (source) source.addEventListener('error', revealPoster);
+
+      attemptPlay();
+
+      // Backstop: if nothing has loaded after a few seconds, show the poster.
+      setTimeout(function () { if (video.readyState < 2) revealPoster(); }, 6000);
+
+      // Resume if the tab was backgrounded during load.
+      document.addEventListener('visibilitychange', function () {
+        if (!document.hidden && video.style.display !== 'none') attemptPlay();
+      });
+    })();
+
     // Platinum CTA -> prefill/tag the contact form as a Platinum inquiry
     document.querySelectorAll('[data-prefill-service]').forEach(function (el) {
       el.addEventListener('click', function () {
