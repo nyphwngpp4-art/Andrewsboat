@@ -1,0 +1,6 @@
+{
+  "//": "Single source of truth for the deployed origin and indexing. Run `npm run build` after changing. origin = the URL this build will be served from (the pages.dev preview URL for the demo; https://andrewsmarine.net or the www variant for production). originConfirmed: flip to true only after Andrew confirms the launch hostname and www/non-www preference \u2014 this is a launch blocker. indexingEnabled: keep false for every pre-approval/preview deploy; true (with originConfirmed) emits the canonical tag, removes the noindex meta, and opens robots.txt with a sitemap reference.",
+  "origin": "https://andrewsmarine.net",
+  "originConfirmed": false,
+  "indexingEnabled": false
+}

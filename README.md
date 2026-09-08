@@ -1,12 +1,36 @@
 # Andrew's Marine Maintenance & Repair - Demo Site
 
-Single-page static demo built by Agavi AI for Andrew's Marine Maintenance and Repair, LLC (Brownwood, TX / Lake Brownwood). Plain HTML + CSS + vanilla JS, no build step. Everything unverified is a clearly labeled placeholder; nothing on the page is invented.
+Single-page static demo built by Agavi AI for Andrew's Marine Maintenance and Repair, LLC (Brownwood, TX / Lake Brownwood). Plain HTML + vanilla JS with one tiny build step (Tailwind CSS + metadata stamping). Everything unverified is a clearly labeled placeholder; nothing on the page is invented.
 
-## Files
+## File structure
 
-- `index.html` - the whole page, **including all active styling and scripts (inline)**
-- `styles.css` / `app.js` - legacy files from an earlier iteration; they are **not loaded** by `index.html` and are kept only for reference
-- `README.md` - this file
+- `index.html` - the whole page: markup, custom styles, and all scripts (single source of truth)
+- `assets/site.css` - **generated** Tailwind CSS (committed so the deployed site needs no build server)
+- `og-image.png` - 1200x630 social preview card (referenced by the OG/Twitter meta tags)
+- `images/` - hero video (`hero-lake-brownwood.mp4`), poster (`hero-poster.jpg`), and photos harvested for future gallery slots (pending Andrew's OK)
+- `site.config.json` - deployed origin + indexing switches (see below)
+- `build.mjs`, `tailwind.config.js`, `src/tailwind.css` - the build
+- `robots.txt`, `sitemap.xml` - **generated** by the build from `site.config.json`
+
+Former `styles.css` / `app.js` from an earlier iteration were unused by `index.html` and have been removed (history has them if ever needed).
+
+## Build and preview
+
+```
+npm install        # pinned: tailwindcss 3.4.17 (exact, via package-lock.json)
+npm run build      # compiles assets/site.css, stamps metadata, writes robots.txt + sitemap.xml
+npm run preview    # serves the repo root at http://localhost:8080
+```
+
+Run `npm run build` after editing `index.html` (new Tailwind classes) or `site.config.json`. Generated outputs are committed, so the **deployment output directory is the repo root** - no build runs on the host.
+
+## Production origin and indexing (`site.config.json`)
+
+- `origin` - the URL this build will be served from. For the demo deploy, set it to the `*.pages.dev` URL so the texted link's social preview card resolves absolute `og:image`/`og:url`. For launch, the production origin.
+- `originConfirmed` - **launch blocker**: `andrewsmarine.net` is owned (shop email runs on it), but the final hostname and www vs non-www preference must be confirmed with Andrew. Keep `false` until then.
+- `indexingEnabled` - keep `false` for every pre-approval/preview deploy: the build emits `<meta name="robots" content="noindex, nofollow">` and a `Disallow: /` robots.txt so the unapproved demo is never indexed as the official site. At launch, set both flags `true` and rebuild: the noindex meta is replaced by the canonical link, robots.txt opens up and references `sitemap.xml`.
+
+The canonical URL is intentionally absent until both flags are true - no guessed or placeholder canonicals ship.
 
 ## Seasonal winterization banner (fall campaign)
 
@@ -14,9 +38,24 @@ The slim banner below the nav is controlled by one switch: `SITE_CONFIG.seasonal
 
 The shop's minimum serviced model year lives in the same config object (`SITE_CONFIG.minServiceYear`, currently 2005) and drives both the form hint text and validation. The upper bound is always the current calendar year + 1.
 
-## Post-approval task: live request delivery
+## Current form behavior (SMS draft)
 
-The Request Service form is intentionally front-end only in this demo: it validates, then builds an SMS draft in the **customer's own messaging app** — the customer reviews and taps Send, and the site never claims a request was received or an appointment booked. After Andrew approves the site, add real delivery (e.g. a Cloudflare Pages Function emailing `Info@andrewsmarine.net`, or a texting integration he prefers) and keep the SMS draft as a fallback. Do not enable any automated delivery or send test messages to Andrew before approval.
+The Request Service form is front-end only: it validates (required service selection; model year within policy), then builds an SMS draft in the **customer's own messaging app** - the customer reviews and taps Send. The site never sends anything itself and never claims a request was received or an appointment booked.
+
+## Deferred post-approval work
+
+- **Live intake delivery** - e.g. a Cloudflare Pages Function emailing `Info@andrewsmarine.net` or a texting integration Andrew prefers, keeping the SMS draft as fallback. Not implemented; do not enable automated delivery or send test messages to Andrew before approval.
+- **Customer reviews** - harvest verbatim Google/Facebook review text only with permission; never paraphrase-as-quote, never invent.
+- **Automations** - AI voice/overflow handling and any automated status updates are roadmap only; the site currently claims none.
+
+## Owner approvals required before launch
+
+1. Final hostname and www/non-www preference (`originConfirmed`), then enable indexing.
+2. Platinum program pricing, terms, eligibility, and coverage specifics.
+3. Photos (Facebook harvest), logo file, and any gallery content.
+4. Reviews harvest permission.
+5. Address confirmation (7855 Hwy 279 vs directory conflicts) and contact details.
+6. Go-ahead to activate live form delivery.
 
 ## Deploy to Cloudflare Pages
 
@@ -24,18 +63,18 @@ Option A - direct upload (fastest for a demo):
 
 1. Log in to the Cloudflare dashboard and go to **Workers & Pages > Create > Pages > Upload assets**.
 2. Name the project (e.g. `andrews-marine-demo`).
-3. Drag in the repo folder (or a zip of `index.html`, `styles.css`, `app.js`).
+3. Run `npm run build` locally (after setting `origin` in `site.config.json` to the `pages.dev` URL), then drag in the repo folder minus `node_modules`.
 4. Deploy. The site is live at `https://<project>.pages.dev` in under a minute.
 
 Option B - Git integration (auto-deploys on push):
 
 1. **Workers & Pages > Create > Pages > Connect to Git** and pick this repository.
-2. Build settings: framework preset **None**, build command **(leave empty)**, output directory **/** (repo root).
+2. Build settings: framework preset **None**, build command **(leave empty)**, output directory **/** (repo root). Generated files are committed, so no host-side build is needed.
 3. Save and deploy. Every push to the connected branch redeploys.
 
 Post-deploy step (both options):
 
-- Open `index.html` and replace the two relative `og-image.png` references in the social-preview meta tags with the absolute URL (`https://<project>.pages.dev/og-image.png`). Texting apps and Messenger ignore relative og:image paths; this one edit is what makes the link preview card show up when the demo URL is texted to Andrew.
+- Set `origin` in `site.config.json` to the deployed URL, run `npm run build`, and redeploy/commit - this makes `og:url`/`og:image` absolute for that host so the link preview card shows when the demo URL is texted to Andrew. Keep `indexingEnabled` false for the demo.
 
 Production notes:
 

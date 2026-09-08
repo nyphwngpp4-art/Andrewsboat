@@ -1,0 +1,20 @@
+{
+  "name": "andrews-marine-demo",
+  "version": "1.0.0",
+  "description": "Andrew's Marine demo site (static, no framework)",
+  "scripts": {
+    "build": "node build.mjs",
+    "preview": "python3 -m http.server 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyphwngpp4-art/Andrewsboat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nyphwngpp4-art/Andrewsboat/issues"
+  },
+  "homepage": "https://github.com/nyphwngpp4-art/Andrewsboat#readme",
+  "devDependencies": {
+    "tailwindcss": "3.4.17"
+  }
+}
