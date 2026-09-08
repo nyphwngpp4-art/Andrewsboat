@@ -4,10 +4,19 @@ Single-page static demo built by Agavi AI for Andrew's Marine Maintenance and Re
 
 ## Files
 
-- `index.html` - the whole page
-- `styles.css` - all styling (lake teal / warm sand / buoy orange, Big Shoulders Display)
-- `app.js` - form handling (front-end only) and a reduced-motion-aware scroll reveal
+- `index.html` - the whole page, **including all active styling and scripts (inline)**
+- `styles.css` / `app.js` - legacy files from an earlier iteration; they are **not loaded** by `index.html` and are kept only for reference
 - `README.md` - this file
+
+## Seasonal winterization banner (fall campaign)
+
+The slim banner below the nav is controlled by one switch: `SITE_CONFIG.seasonalBannerEnabled` in the inline script at the bottom of `index.html`. Set it to `false` after the campaign to hide the banner site-wide; the winterization section, its CTAs, and the form's winterization option remain available either way. Visitor dismissal of the banner lasts for the browser session (`sessionStorage`).
+
+The shop's minimum serviced model year lives in the same config object (`SITE_CONFIG.minServiceYear`, currently 2005) and drives both the form hint text and validation. The upper bound is always the current calendar year + 1.
+
+## Post-approval task: live request delivery
+
+The Request Service form is intentionally front-end only in this demo: it validates, then builds an SMS draft in the **customer's own messaging app** — the customer reviews and taps Send, and the site never claims a request was received or an appointment booked. After Andrew approves the site, add real delivery (e.g. a Cloudflare Pages Function emailing `Info@andrewsmarine.net`, or a texting integration he prefers) and keep the SMS draft as a fallback. Do not enable any automated delivery or send test messages to Andrew before approval.
 
 ## Deploy to Cloudflare Pages
 

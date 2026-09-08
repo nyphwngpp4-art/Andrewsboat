@@ -61,6 +61,29 @@
       transform: translateY(-4px);
       box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.05), 0 8px 10px -6px rgb(0 0 0 / 0.05);
     }
+
+    .hero-video-toggle {
+      position: absolute;
+      bottom: 1.25rem;
+      right: 1.25rem;
+      z-index: 4;
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 9999px;
+      background: rgba(15, 23, 42, 0.55);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      transition: background-color 0.2s ease;
+    }
+
+    .hero-video-toggle:hover {
+      background: rgba(15, 23, 42, 0.78);
+    }
+
+    .hero-video-toggle:focus-visible {
+      outline: 2px solid #f4d9c8;
+      outline-offset: 2px;
+    }
   </style>
 </head>
 <body class="bg-[#f8f5f0] text-[#2c332b]">
@@ -78,9 +101,10 @@
         </div>
       </div>
 
-      <div class="hidden md:flex items-center gap-x-8 text-sm">
-        <a href="#platinum" class="hover:text-[#1f3a32] transition-colors">Platinum</a>
+      <div class="hidden lg:flex items-center gap-x-8 text-sm">
+        <a href="#winterization" class="hover:text-[#1f3a32] transition-colors">Winterization</a>
         <a href="#services" class="hover:text-[#1f3a32] transition-colors">Services</a>
+        <a href="#platinum" class="hover:text-[#1f3a32] transition-colors">Platinum</a>
         <a href="#contact" class="hover:text-[#1f3a32] transition-colors">Contact</a>
       </div>
 
@@ -110,13 +134,37 @@
     </div>
   </nav>
 
+  <!--
+    SEASONAL BANNER (fall winterization campaign)
+    In normal document flow, below the nav and above the hero. Never a
+    pop-up or overlay. Dismissal lasts for the browser session.
+    On/off switch: SITE_CONFIG.seasonalBannerEnabled in the script below.
+  -->
+  <div id="seasonalBanner" hidden class="bg-[#1f3a32] text-white">
+    <div class="max-w-screen-xl mx-auto px-4 sm:px-6 py-2.5 flex items-center justify-center gap-x-3 sm:gap-x-4 text-sm">
+      <p class="min-w-0">
+        <i class="fa-solid fa-snowflake text-[#f4d9c8] mr-2" aria-hidden="true"></i><span class="text-white/90">Planning your last lake trip? Ask about winterization.</span>
+        <a href="#contact" data-prefill-service="Winterization / Seasonal Service" class="ml-2 font-semibold underline underline-offset-2 whitespace-nowrap hover:text-[#f4d9c8] transition-colors">Request Winterization</a>
+      </p>
+      <button type="button" id="seasonalBannerDismiss" aria-label="Dismiss winterization notice"
+              class="shrink-0 w-8 h-8 rounded-full hover:bg-white/10 transition-colors flex items-center justify-center">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+
   <!-- CINEMATIC HERO -->
   <div class="cinematic-hero">
-    <video autoplay muted loop playsinline webkit-playsinline preload="auto" poster="images/hero-poster.jpg" class="w-full h-full object-cover">
+    <!-- Autoplay is driven by the script below (skipped under prefers-reduced-motion). -->
+    <video muted loop playsinline webkit-playsinline preload="auto" poster="images/hero-poster.jpg" class="w-full h-full object-cover">
       <source src="images/hero-lake-brownwood.mp4" type="video/mp4">
     </video>
 
     <div class="hero-overlay"></div>
+
+    <button type="button" id="heroVideoToggle" hidden aria-label="Pause background video" class="hero-video-toggle">
+      <i class="fa-solid fa-pause" aria-hidden="true"></i>
+    </button>
 
     <div class="max-w-screen-xl mx-auto px-6 relative z-10">
       <div class="max-w-2xl hero-content">
@@ -148,6 +196,119 @@
             <span>Text the Shop</span>
           </a>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!--
+    WINTERIZATION (fall campaign section)
+    Copy intentionally avoids prices, package inclusions, deadlines,
+    pickup/delivery, storage, and turnaround promises — none are approved.
+    Scheduling and availability are confirmed by the shop, not the site.
+  -->
+  <section id="winterization" class="bg-white border-b border-[#e5e0d5]">
+    <div class="max-w-screen-xl mx-auto px-6 py-16 md:py-20">
+      <div class="max-w-3xl">
+        <div class="text-xs tracking-[2px] text-[#b8552d] font-medium">SEASON'S WINDING DOWN</div>
+        <h2 class="text-4xl md:text-5xl font-semibold tracking-tight mt-2">Winterization, planned around your last lake trip</h2>
+        <p class="mt-4 text-lg text-[#4a5248]">When you're done on the water for the year, proper winterization protects your engine and systems through the off-season. Here's how to set it up with the shop:</p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div class="bg-[#f8f5f0] border border-[#e5e0d5] rounded-3xl p-7">
+          <div class="w-11 h-11 rounded-2xl bg-[#b8552d]/10 flex items-center justify-center mb-5">
+            <i class="fa-solid fa-calendar-check text-xl text-[#b8552d]"></i>
+          </div>
+          <h3 class="font-semibold text-xl tracking-tight">Plan around your last trip</h3>
+          <p class="mt-3 text-[15px] text-[#4a5248]">Time winterization for after your final outing of the year so your boat goes straight from the water into the off-season protected.</p>
+        </div>
+
+        <div class="bg-[#f8f5f0] border border-[#e5e0d5] rounded-3xl p-7">
+          <div class="w-11 h-11 rounded-2xl bg-[#b8552d]/10 flex items-center justify-center mb-5">
+            <i class="fa-solid fa-comment-dots text-xl text-[#b8552d]"></i>
+          </div>
+          <h3 class="font-semibold text-xl tracking-tight">Reach out before you haul in</h3>
+          <p class="mt-3 text-[15px] text-[#4a5248]">Contact Andrew before bringing the boat to the shop so the work can be lined up ahead of your drop-off.</p>
+        </div>
+
+        <div class="bg-[#f8f5f0] border border-[#e5e0d5] rounded-3xl p-7">
+          <div class="w-11 h-11 rounded-2xl bg-[#b8552d]/10 flex items-center justify-center mb-5">
+            <i class="fa-solid fa-clipboard-list text-xl text-[#b8552d]"></i>
+          </div>
+          <h3 class="font-semibold text-xl tracking-tight">Share your boat's info</h3>
+          <p class="mt-3 text-[15px] text-[#4a5248]">Include the year, make, and engine details so the shop can confirm the scope of the work and timing with you.</p>
+        </div>
+      </div>
+
+      <p class="mt-8 max-w-3xl text-[#4a5248]">Visiting Lake Brownwood from out of town? Get in touch before your trip and the shop can help you plan service around your visit.</p>
+
+      <div class="mt-8">
+        <a href="#contact" data-prefill-service="Winterization / Seasonal Service"
+           class="w-full sm:w-auto inline-flex items-center justify-center gap-x-3 px-8 py-4 bg-[#1f3a32] hover:bg-[#2a4a40] transition-colors text-white font-semibold rounded-3xl text-sm tracking-wider">
+          REQUEST WINTERIZATION
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+        <p class="mt-3 text-sm text-[#6a6f64]">Scheduling and availability are confirmed directly with the shop.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <div id="services" class="max-w-screen-xl mx-auto px-6 py-16">
+    <div class="flex justify-between items-end mb-8">
+      <div>
+        <div class="text-xs tracking-[2px] text-[#b8552d] font-medium">WHAT WE DO BEST</div>
+        <h2 class="text-4xl font-semibold tracking-tight mt-2">Services</h2>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
+        <div class="flex items-center gap-x-3 mb-4">
+          <i class="fa-solid fa-tools text-2xl text-[#b8552d]"></i>
+          <h3 class="font-semibold text-xl">Boat &amp; PWC Repair</h3>
+        </div>
+        <p class="text-[#4a5248]">Inboard, sterndrive, outboard, and personal watercraft diagnostics, maintenance, and repair.</p>
+      </div>
+
+      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
+        <div class="flex items-center gap-x-3 mb-4">
+          <i class="fa-solid fa-sync text-2xl text-[#b8552d]"></i>
+          <h3 class="font-semibold text-xl">Winterization &amp; Seasonal Service</h3>
+        </div>
+        <p class="text-[#4a5248]">Proper winterization and seasonal maintenance so your boat is ready when you are.</p>
+      </div>
+
+      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
+        <div class="flex items-center gap-x-3 mb-4">
+          <i class="fa-solid fa-ship text-2xl text-[#b8552d]"></i>
+          <h3 class="font-semibold text-xl">Propeller Repair &amp; ACME</h3>
+        </div>
+        <p class="text-[#4a5248]">Expert propeller repair and sales. We carry ACME propellers and match the right one for your boat.</p>
+      </div>
+
+      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
+        <div class="flex items-center gap-x-3 mb-4">
+          <i class="fa-solid fa-chair text-2xl text-[#b8552d]"></i>
+          <h3 class="font-semibold text-xl">Canvas &amp; Upholstery</h3>
+        </div>
+        <p class="text-[#4a5248]">Bimini tops, covers, seating, and custom canvas work done right here at the shop.</p>
+      </div>
+
+      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
+        <div class="flex items-center gap-x-3 mb-4">
+          <i class="fa-solid fa-volume-up text-2xl text-[#b8552d]"></i>
+          <h3 class="font-semibold text-xl">Marine Audio &amp; Electronics</h3>
+        </div>
+        <p class="text-[#4a5248]">New stereos, speakers, fish finders, and electronics installation.</p>
+      </div>
+
+      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
+        <div class="flex items-center gap-x-3 mb-4">
+          <i class="fa-solid fa-boxes text-2xl text-[#b8552d]"></i>
+          <h3 class="font-semibold text-xl">Parts &amp; Gear</h3>
+        </div>
+        <p class="text-[#4a5248]">We stock common parts and accessories so you're not waiting on shipping.</p>
       </div>
     </div>
   </div>
@@ -231,66 +392,6 @@
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <div id="services" class="max-w-screen-xl mx-auto px-6 py-16">
-    <div class="flex justify-between items-end mb-8">
-      <div>
-        <div class="text-xs tracking-[2px] text-[#b8552d] font-medium">WHAT WE DO BEST</div>
-        <h2 class="text-4xl font-semibold tracking-tight mt-2">Services</h2>
-      </div>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
-        <div class="flex items-center gap-x-3 mb-4">
-          <i class="fa-solid fa-tools text-2xl text-[#b8552d]"></i>
-          <h3 class="font-semibold text-xl">Boat &amp; PWC Repair</h3>
-        </div>
-        <p class="text-[#4a5248]">Inboard, sterndrive, outboard, and personal watercraft diagnostics, maintenance, and repair.</p>
-      </div>
-
-      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
-        <div class="flex items-center gap-x-3 mb-4">
-          <i class="fa-solid fa-sync text-2xl text-[#b8552d]"></i>
-          <h3 class="font-semibold text-xl">Winterization &amp; Seasonal Service</h3>
-        </div>
-        <p class="text-[#4a5248]">Proper winterization and seasonal maintenance so your boat is ready when you are.</p>
-      </div>
-
-      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
-        <div class="flex items-center gap-x-3 mb-4">
-          <i class="fa-solid fa-ship text-2xl text-[#b8552d]"></i>
-          <h3 class="font-semibold text-xl">Propeller Repair &amp; ACME</h3>
-        </div>
-        <p class="text-[#4a5248]">Expert propeller repair and sales. We carry ACME propellers and match the right one for your boat.</p>
-      </div>
-
-      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
-        <div class="flex items-center gap-x-3 mb-4">
-          <i class="fa-solid fa-chair text-2xl text-[#b8552d]"></i>
-          <h3 class="font-semibold text-xl">Canvas &amp; Upholstery</h3>
-        </div>
-        <p class="text-[#4a5248]">Bimini tops, covers, seating, and custom canvas work done right here at the shop.</p>
-      </div>
-
-      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
-        <div class="flex items-center gap-x-3 mb-4">
-          <i class="fa-solid fa-volume-up text-2xl text-[#b8552d]"></i>
-          <h3 class="font-semibold text-xl">Marine Audio &amp; Electronics</h3>
-        </div>
-        <p class="text-[#4a5248]">New stereos, speakers, fish finders, and electronics installation.</p>
-      </div>
-
-      <div class="service-card bg-white p-7 rounded-3xl border border-[#e5e0d5]">
-        <div class="flex items-center gap-x-3 mb-4">
-          <i class="fa-solid fa-boxes text-2xl text-[#b8552d]"></i>
-          <h3 class="font-semibold text-xl">Parts &amp; Gear</h3>
-        </div>
-        <p class="text-[#4a5248]">We stock common parts and accessories so you're not waiting on shipping.</p>
-      </div>
-    </div>
-  </div>
-
   <!--
     SHOP POLICIES: verified from on-site photos. Specific dollar/percent
     figures are withheld from rendered copy pending Andrew's approval.
@@ -348,7 +449,7 @@
         <p class="mt-3 text-[#4a5248]">Share a few details. We’ll build a text message you can review and send directly to Andrew.</p>
       </div>
 
-      <form id="serviceForm" class="bg-white border border-[#e5e0d5] rounded-3xl p-8 space-y-6">
+      <form id="serviceForm" novalidate class="bg-white border border-[#e5e0d5] rounded-3xl p-8 space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <label for="name" class="text-xs font-medium text-[#6a6f64] block mb-1.5">YOUR NAME</label>
@@ -363,20 +464,28 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <label for="unitYear" class="text-xs font-medium text-[#6a6f64] block mb-1.5">BOAT / PWC YEAR</label>
-            <input type="number" id="unitYear" name="unitYear" min="1900" max="2027" placeholder="Example: 2018" required class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
+            <!-- min/max are set from the script's SITE_CONFIG.minServiceYear + current year + 1. -->
+            <input type="number" id="unitYear" name="unitYear" inputmode="numeric" step="1" placeholder="Example: 2018" required
+                   aria-describedby="unitYearHelp unitYearError"
+                   class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
+            <p id="unitYearHelp" class="mt-1.5 text-xs text-[#6a6f64]">We service model year 2005 or newer.</p>
+            <p id="unitYearError" role="alert" hidden class="mt-1.5 text-xs font-medium text-[#b8552d]"></p>
           </div>
           <div>
             <label for="serviceType" class="text-xs font-medium text-[#6a6f64] block mb-1.5">WHAT DO YOU NEED HELP WITH?</label>
-            <select id="serviceType" name="serviceType" class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
-              <option>Platinum Service Customer</option>
+            <select id="serviceType" name="serviceType" required aria-describedby="serviceTypeError"
+                    class="w-full border border-[#d1c9b8] rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-[#b8552d]">
+              <option value="" selected>Select a service</option>
               <option>Boat / PWC Repair</option>
               <option>Winterization / Seasonal Service</option>
               <option>Propeller Repair</option>
               <option>Canvas / Upholstery</option>
               <option>Marine Audio / Electronics</option>
+              <option>Platinum Service Customer</option>
               <option>Parts Inquiry</option>
               <option>Other / Not sure</option>
             </select>
+            <p id="serviceTypeError" role="alert" hidden class="mt-1.5 text-xs font-medium text-[#b8552d]"></p>
           </div>
         </div>
 
@@ -392,7 +501,7 @@
           OPEN TEXT TO ANDREW
         </button>
 
-        <p class="text-center text-xs text-[#6a6f64]">This opens your messaging app with the details above. Review the message, then tap Send.</p>
+        <p class="text-center text-xs text-[#6a6f64]">This only opens your messaging app with the details above — nothing is sent until you review the message and tap Send.</p>
       </form>
     </div>
   </div>
@@ -435,37 +544,97 @@
   </footer>
 
   <script>
-    // Hero background video: force muted autoplay across desktop and mobile.
-    // The poster remains visible while the video loads and on genuine media errors.
+    // ============================================================
+    // SITE CONFIGURATION
+    // ============================================================
+    var SITE_CONFIG = {
+      // Seasonal winterization banner shown below the nav. Set to false to
+      // disable the banner after the fall campaign; the winterization
+      // section, its CTAs, and the form option all remain available.
+      seasonalBannerEnabled: true,
+
+      // Shop policy: oldest model year serviced. This is the single place
+      // to change the minimum year — it drives the form hint text and all
+      // validation. The upper bound is always the current calendar year + 1.
+      minServiceYear: 2005
+    };
+
+    // Hero background video.
+    // - Muted inline autoplay/loop is driven from here (not the autoplay
+    //   attribute) so reduced-motion visitors get the poster + a play button.
+    // - A manual pause persists for the page visit: no scroll, click, or
+    //   visibility handler restarts the video after the visitor pauses it.
+    // - On genuine media errors the video hides and the poster background
+    //   (and the poster attribute) remain.
     (function () {
       var video = document.querySelector('.cinematic-hero video');
+      var toggle = document.getElementById('heroVideoToggle');
       if (!video) return;
+
+      var userPaused = false;
+      var prefersReducedMotion = window.matchMedia &&
+        window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       video.muted = true;
       video.defaultMuted = true;
       video.playsInline = true;
       video.setAttribute('muted', '');
 
+      function setToggleState(playing) {
+        if (!toggle) return;
+        toggle.hidden = false;
+        toggle.setAttribute('aria-label', playing ? 'Pause background video' : 'Play background video');
+        var icon = toggle.querySelector('i');
+        if (icon) icon.className = playing ? 'fa-solid fa-pause' : 'fa-solid fa-play';
+      }
+
       function attemptPlay() {
+        if (userPaused) return;
         var p = video.play();
         if (p && typeof p.catch === 'function') p.catch(function () {});
       }
 
       function revealPoster() {
         video.style.display = 'none';
+        if (toggle) toggle.hidden = true;
+      }
+
+      video.addEventListener('play', function () { setToggleState(true); });
+      video.addEventListener('pause', function () { setToggleState(false); });
+      video.addEventListener('error', revealPoster);
+      var source = video.querySelector('source');
+      if (source) source.addEventListener('error', revealPoster);
+
+      if (toggle) {
+        toggle.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (video.paused) {
+            userPaused = false;
+            var p = video.play();
+            if (p && typeof p.catch === 'function') p.catch(function () {});
+          } else {
+            userPaused = true;
+            video.pause();
+          }
+        });
+      }
+
+      if (prefersReducedMotion) {
+        // Reduced motion: keep the poster and let the visitor opt in.
+        userPaused = true;
+        setToggleState(false);
+        return;
       }
 
       video.addEventListener('loadedmetadata', attemptPlay);
       video.addEventListener('loadeddata', attemptPlay);
       video.addEventListener('canplay', attemptPlay);
-      video.addEventListener('error', revealPoster);
-
-      var source = video.querySelector('source');
-      if (source) source.addEventListener('error', revealPoster);
-
       try { video.load(); } catch (e) {}
       attemptPlay();
+      setToggleState(!video.paused);
 
+      // Recover from blocked autoplay on first interaction only; attemptPlay
+      // is a no-op once the visitor has manually paused.
       function kickstart() {
         attemptPlay();
         window.removeEventListener('touchstart', kickstart);
@@ -482,21 +651,109 @@
       });
     })();
 
-    // Platinum CTA -> prefill/tag the contact form as a Platinum inquiry.
+    // Seasonal banner: shown only when enabled in SITE_CONFIG and not yet
+    // dismissed this browser session (sessionStorage).
+    (function () {
+      var banner = document.getElementById('seasonalBanner');
+      if (!banner || !SITE_CONFIG.seasonalBannerEnabled) return;
+
+      var DISMISS_KEY = 'am-seasonal-banner-dismissed';
+      var dismissed = false;
+      try { dismissed = sessionStorage.getItem(DISMISS_KEY) === '1'; } catch (e) {}
+      if (dismissed) return;
+
+      banner.hidden = false;
+
+      var btn = document.getElementById('seasonalBannerDismiss');
+      if (btn) {
+        btn.addEventListener('click', function () {
+          banner.hidden = true;
+          try { sessionStorage.setItem(DISMISS_KEY, '1'); } catch (e) {}
+        });
+      }
+    })();
+
+    // ============================================================
+    // SERVICE REQUEST FORM
+    // ============================================================
+    var serviceForm = document.getElementById('serviceForm');
+    var serviceSelect = document.getElementById('serviceType');
+    var unitYearInput = document.getElementById('unitYear');
+    var maxServiceYear = new Date().getFullYear() + 1;
+
+    // Wire the year bounds and hint text from the one configured minimum.
+    unitYearInput.min = SITE_CONFIG.minServiceYear;
+    unitYearInput.max = maxServiceYear;
+    document.getElementById('unitYearHelp').textContent =
+      'We service model year ' + SITE_CONFIG.minServiceYear + ' or newer.';
+
+    function showFieldError(field, errorId, message) {
+      var errorEl = document.getElementById(errorId);
+      errorEl.textContent = message;
+      errorEl.hidden = false;
+      field.setAttribute('aria-invalid', 'true');
+    }
+
+    function clearFieldError(field, errorId) {
+      var errorEl = document.getElementById(errorId);
+      errorEl.textContent = '';
+      errorEl.hidden = true;
+      field.removeAttribute('aria-invalid');
+    }
+
+    function validateServiceType() {
+      if (!serviceSelect.value) {
+        showFieldError(serviceSelect, 'serviceTypeError', 'Please select a service.');
+        return false;
+      }
+      clearFieldError(serviceSelect, 'serviceTypeError');
+      return true;
+    }
+
+    function validateUnitYear() {
+      var raw = unitYearInput.value.trim();
+      var min = SITE_CONFIG.minServiceYear;
+
+      if (!raw) {
+        showFieldError(unitYearInput, 'unitYearError', 'Please enter your boat or PWC model year.');
+        return false;
+      }
+      if (!/^\d{4}$/.test(raw)) {
+        showFieldError(unitYearInput, 'unitYearError', 'Please enter a four-digit model year (whole number, e.g. 2018).');
+        return false;
+      }
+      var year = parseInt(raw, 10);
+      if (year < min) {
+        showFieldError(unitYearInput, 'unitYearError',
+          "Sorry — the shop doesn't service units built before " + min + '.');
+        return false;
+      }
+      if (year > maxServiceYear) {
+        showFieldError(unitYearInput, 'unitYearError',
+          'Please enter a model year of ' + maxServiceYear + ' or earlier.');
+        return false;
+      }
+      clearFieldError(unitYearInput, 'unitYearError');
+      return true;
+    }
+
+    serviceSelect.addEventListener('change', validateServiceType);
+    unitYearInput.addEventListener('input', function () {
+      clearFieldError(unitYearInput, 'unitYearError');
+    });
+
+    // CTAs tagged with data-prefill-service (Platinum, winterization,
+    // seasonal banner) preselect that service in the form. User-entered
+    // name, phone, and message are never modified.
     document.querySelectorAll('[data-prefill-service]').forEach(function (el) {
       el.addEventListener('click', function () {
         var val = el.getAttribute('data-prefill-service');
-        var select = document.getElementById('serviceType');
-        if (select) {
-          var match = Array.prototype.find.call(select.options, function (o) {
-            return o.value === val || o.text === val;
-          });
-          if (match) select.value = match.value;
-        }
-
-        var message = document.getElementById('message');
-        if (message && !message.value) {
-          message.value = "I'd like to learn more about the Platinum Service Customer program.";
+        var match = Array.prototype.find.call(serviceSelect.options, function (o) {
+          return o.value === val || o.text === val;
+        });
+        if (match) {
+          serviceSelect.value = match.value;
+          clearFieldError(serviceSelect, 'serviceTypeError');
         }
       });
     });
@@ -511,14 +768,22 @@
       });
     });
 
-    // Build a structured SMS in the customer's messaging app.
-    document.getElementById('serviceForm').addEventListener('submit', function (e) {
+    // Build a structured SMS draft in the customer's own messaging app.
+    // Nothing is sent by the site: the customer reviews and taps Send.
+    // Live backend delivery is intentionally NOT implemented (post-approval).
+    serviceForm.addEventListener('submit', function (e) {
       e.preventDefault();
+
+      // Validate before constructing any SMS draft.
+      var yearOk = validateUnitYear();
+      var serviceOk = validateServiceType();
+      if (!yearOk) { unitYearInput.focus(); return; }
+      if (!serviceOk) { serviceSelect.focus(); return; }
 
       var name = document.getElementById('name').value.trim();
       var phone = document.getElementById('phone').value.trim();
-      var unitYear = document.getElementById('unitYear').value.trim();
-      var serviceType = document.getElementById('serviceType').value;
+      var unitYear = unitYearInput.value.trim();
+      var serviceType = serviceSelect.value;
       var details = document.getElementById('message').value.trim() || 'No additional details provided.';
 
       var body = [
@@ -533,7 +798,15 @@
 
       var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
       var separator = isIOS ? '&' : '?';
-      window.location.href = 'sms:+13253202018' + separator + 'body=' + encodeURIComponent(body);
+      var smsUrl = 'sms:+13253202018' + separator + 'body=' + encodeURIComponent(body);
+
+      // window.__smsNavigate is a test-only hook so automated tests can
+      // intercept the handoff instead of triggering a real sms: navigation.
+      if (typeof window.__smsNavigate === 'function') {
+        window.__smsNavigate(smsUrl);
+      } else {
+        window.location.href = smsUrl;
+      }
     });
   </script>
 </body>
