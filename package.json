@@ -1,0 +1,16 @@
+{
+  "name": "andrews-marine-site",
+  "private": true,
+  "description": "Static site for Andrew's Marine Maintenance & Repair. Build output is committed; no deploy build step needed.",
+  "scripts": {
+    "build:css": "tailwindcss -i src/site.css -o assets/site.css --minify",
+    "watch:css": "tailwindcss -i src/site.css -o assets/site.css --watch",
+    "build:icons": "node scripts/build-icons.mjs",
+    "build": "npm run build:icons && npm run build:css"
+  },
+  "devDependencies": {
+    "@phosphor-icons/core": "^2.1.1",
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}
