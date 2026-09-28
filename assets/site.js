@@ -93,6 +93,12 @@
     });
   }
 
+  // ----- Seasonal content: hide after its data-show-until date (shop time) -----
+  document.querySelectorAll("[data-show-until]").forEach(function (el) {
+    var until = new Date(el.getAttribute("data-show-until") + "T23:59:59-06:00");
+    if (!isNaN(until.getTime()) && Date.now() > until.getTime()) el.hidden = true;
+  });
+
   // ----- Hours: live open/closed status in shop time (Central) -----
   var status = document.querySelector("[data-open-status]");
   if (status && window.Intl) {
@@ -162,7 +168,8 @@
     });
   }
 
-  // Platinum CTA: tag the form as a Platinum inquiry.
+  // Platinum and winterization CTAs: preselect the service (and a starter
+  // message if the visitor hasn't typed one).
   document.querySelectorAll("[data-prefill-service]").forEach(function (el) {
     el.addEventListener("click", function () {
       var value = el.getAttribute("data-prefill-service");
@@ -173,9 +180,8 @@
         }
         return false;
       });
-      if (!messageField.value) {
-        messageField.value = "I'd like to learn more about the Platinum Service Customer program.";
-      }
+      var message = el.getAttribute("data-prefill-message");
+      if (message && !messageField.value) messageField.value = message;
       focusName();
     });
   });

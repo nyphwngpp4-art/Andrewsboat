@@ -5,5 +5,8 @@
 - Brand tokens live in the `@theme` block of `src/site.css`. Use them (`bg-pine`, `text-clay`, `text-ink-muted`, `border-line`, ...) instead of raw hex values. `text-clay` is the AA-safe accent for small text; `text-clay-bright` is for icons and large display type only.
 - Icons are an inline Phosphor sprite between the `<!-- icons:start -->` / `<!-- icons:end -->` markers. Add names in `scripts/build-icons.mjs` and run `npm run build:icons`; don't hand-draw SVG paths.
 - Keep the hero video background loop. It autoplays muted, pauses for reduced-motion users, and has a pause button. Keep all three.
-- Claims safety: only publish facts verified with the shop (see README checklist and the HTML comments above the Platinum, Policies, and Photos sections). Never invent prices, terms, reviews, credentials, or promises.
+- Claims safety: only publish facts verified with the shop (see README "Pending owner approvals" and the HTML comments above the Platinum, Winterization, Policies, and Photos sections). Never invent prices, terms, reviews, credentials, or promises.
 - Name, address, phone, and hours appear in the Visit card, the footer, and the JSON-LD block in `<head>`. Change all three together.
+- The repo root is what Cloudflare Pages serves. Never add private notes, pricing, or pitch material to any file in this repo.
+- The demo at andrewsmarine.agaviai.com is intentionally `noindex` (meta tag + `_headers`). Keep it that way until launch; the README lists the launch steps.
+- The winterization band under the hero auto-hides after its `data-show-until` date. Update or remove it rather than letting stale seasonal copy linger.

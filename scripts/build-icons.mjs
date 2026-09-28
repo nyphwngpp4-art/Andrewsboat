@@ -22,6 +22,8 @@ const ICONS = {
     "engine", "snowflake", "fan", "armchair", "speaker-high", "package",
     // Policies
     "timer", "truck", "arrow-counter-clockwise", "warehouse", "calendar-x", "warning",
+    // Winterization
+    "calendar-check", "chat-text", "clipboard-text",
   ],
 };
 

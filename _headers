@@ -1,0 +1,5 @@
+# Cloudflare Pages response headers.
+# Demo only: keep every file out of search engines until Andrew approves launch.
+# Delete this rule when the site goes live on its production domain (see README).
+/*
+  X-Robots-Tag: noindex

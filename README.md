@@ -12,6 +12,7 @@ Single-page static demo built by Agavi AI for Andrew's Marine Maintenance and Re
 - `fonts/` - self-hosted Archivo variable font (SIL OFL, license alongside)
 - `images/` - hero video + poster, Google Business photos, and `images/facebook/` gallery photos
 - `og-image.jpg`, `favicon.svg`, `apple-touch-icon.png` - link preview card and icons
+- `_headers` - Cloudflare Pages response headers (keeps the demo out of search engines)
 
 ## Editing the site
 
@@ -32,7 +33,7 @@ Option A - direct upload (fastest for a demo):
 
 1. Log in to the Cloudflare dashboard and go to **Workers & Pages > Create > Pages > Upload assets**.
 2. Name the project (e.g. `andrews-marine-demo`).
-3. Upload `index.html`, `assets/`, `fonts/`, `images/`, `og-image.jpg`, `favicon.svg`, and `apple-touch-icon.png`. Leave out `node_modules/` if you have run `npm install`.
+3. Upload `index.html`, `_headers`, `assets/`, `fonts/`, `images/`, `og-image.jpg`, `favicon.svg`, and `apple-touch-icon.png`. Leave out `node_modules/` if you have run `npm install`.
 4. Deploy. The site is live at `https://<project>.pages.dev` in under a minute.
 
 Option B - Git integration (auto-deploys on push):
@@ -41,37 +42,30 @@ Option B - Git integration (auto-deploys on push):
 2. Build settings: framework preset **None**, build command **(leave empty)**, output directory **/** (repo root). The committed `assets/site.css` is what ships. (Optionally set the build command to `npm run build:css` so Cloudflare rebuilds it on every push.)
 3. Save and deploy. Every push to the connected branch redeploys.
 
-Post-deploy step (both options):
+**Demo:** served at `https://andrewsmarine.agaviai.com`. The social-preview tags (`og:url`, `og:image`, `twitter:image`) already use that absolute URL, which is what makes the link preview card appear when the link is texted.
 
-- Open `index.html` and replace the two relative `og-image.jpg` references in the social-preview meta tags with the absolute URL (`https://<project>.pages.dev/og-image.jpg`). Texting apps and Messenger ignore relative og:image paths; this one edit is what makes the link preview card show up when the demo URL is texted to Andrew.
+The demo is kept out of search engines on purpose, since it carries Andrew's name and photos he has not approved yet: a `noindex` robots meta tag in `index.html` and an `X-Robots-Tag: noindex` header in `_headers`.
+
+**At launch on the production domain:**
+
+1. Remove the `noindex` meta tag from `index.html` and delete `_headers` (or its `X-Robots-Tag` line).
+2. Change the three absolute `andrewsmarine.agaviai.com` URLs in the social-preview tags to the production domain, and add a `<link rel="canonical">`.
+3. Point the Google Business Profile website link at the production domain, not the demo.
 
 Production notes:
 
 - The Request Service form has no server: it builds a structured text message in the visitor's messaging app (with a copy-paste fallback on desktops). If Andrew would rather get submissions by email, add a Cloudflare Pages Function (e.g. `functions/api/request.js`) that emails `Info@andrewsmarine.net` (MailChannels or an SMTP API) and point the form at it.
 - **Domain:** `andrewsmarine.net` is already owned - the shop's email runs on it. The production site can map to that domain in Pages > Custom domains instead of buying a new one.
 
-## Pitch notes (field intel, use in the room)
+## Pending owner approvals (before launch)
 
-- **Personal-experience opener.** You went to the shop as a real customer needing a boat part. Open with that: what it was like to find him, decide, and show up. You're not selling a theory, you're describing your own path to his counter.
-- **The voicemail is the pitch.** His phone greeting effectively tells callers to text because the shop is too busy. That's proof of demand overflow, in his own recorded voice. It's exactly what the "Heading into a holiday weekend?" section and the request-a-callback form are built to absorb: the site takes the queue so his phone doesn't have to. If he confirms he prefers texts, a "Text the Shop" (`sms:`) button next to the call button is a five-minute add.
-- **Implied reach.** Right now his Google presence is a bare listing with a conflicting address. Just having a real website with matching NAP data widens how far out on the lake he shows up, before any marketing spend. Frame the address fix (checklist item 1) as step one of that.
-- **Warm intro, not a cold pitch.** Andrew has worked with the family for years, and there's now an open, positive text thread: Jay did a Tige impeller swap himself, Andrew gave tips on reassembly over text, the fix held, Jay said he'd reach out if anything else came up, and Andrew closed warm ("That's great to hear Jay! Thank you for reaching out."). That closing is a natural, non-pushy re-entry point. Send the demo link into that thread once it is deployed; the pitch arrives as a neighbor showing him something, not a vendor call.
-- **Leave the Google review first.** Write an honest Google review of the impeller experience before the pitch. It helps him today, it seeds goodwill, and it becomes the first verbatim, verifiable quote for a review slot on the site. The private text thread itself stays private: never quote or paraphrase it on the page without his OK.
-- **He already helps customers over text for free.** Coaching a customer through a reassembly by text IS a service, currently uncaptured. It's more ammunition for the membership (make text-me-first a member perk) and for the eventual voice/queue tooling. Name it in the pitch as value he gives away that the site can organize.
-- **The membership is the recurring-revenue story.** He already sells priority + discounts at the counter (verified in person). The site gives it a permanent home today and, in a later phase, online sign-up and payment. That turns the care-plan pitch from "I'll maintain your website" into "your website sells your membership while you're wrenching."
-- **The storefront widens the site's job.** Parts and gear in stock (verified in person) means photo ops for the gallery's wide slot and, down the road, a parts-counter page or simple inventory highlights. Note it, don't scope it into phase one.
-- **He has a real logo.** The road sign carries a sunrise-over-water mark, not just text. The demo uses a text wordmark by design (we had no logo file); dropping his actual mark into the header is an easy, high-impact "make it yours" beat in the pitch. Ask him for a clean logo file (or photograph the sign) and it swaps into the header in minutes. Do not recreate or fake the logo from the sign photo.
-- **Do not publish the Google Street View image.** The lot/storefront shot from Google Maps is copyrighted by Google (watermarked, dated) and can't go on the site. It's reference only. Shoot your own wide storefront-plus-inventory photo in person for the gallery's wide slot.
-- **Phone-overflow upsell (roadmap, not demo).** An AI voice agent (e.g. xAI's voice agent) could answer overflow calls, take name/number/issue, and drop them into the same queue as the form. Pitch it as a later phase after the site proves itself; it pairs naturally with the "too busy to answer" problem the voicemail already admits.
+Nothing below is rendered as fact until Andrew confirms it. Internal notes are kept outside this repo.
 
-## Pre-meeting checklist (do these before showing Andrew, or with him)
-
-1. **Resolve the address conflict.** `7855 TX-279` and `3304 2nd St` both circulate in directories - an active NAP problem. Confirm the real address in person, then replace the two ADDRESS placeholders (hours section + footer). Fixing the wrong-address listings is part of the care-plan pitch.
-2. **Certifications strip.** Ask Andrew: ABYC? Yamaha/Mercury/Suzuki OEM certs? TX doesn't license marine mechanics, so these are the trade's real trust signals. Populate only what he actually holds; if none, delete the strip entirely.
-3. **Turnaround + priority policy.** Get realistic in-season vs off-season turnaround estimates and whether he triages holiday-week breakdowns. These fill the two placeholders in "Heading into a holiday weekend?" - the page's centerpiece. Ship his numbers, never invented ones.
-4. **Harvest photos.** Two real photos from his Google Business profile are already in: the boat-in-tow shot (hero) and the PWCs-on-the-lake shot (gallery lead). The Facebook page (1,032 followers) is the goldmine for the remaining six labeled slots: engine teardown/rebuild, prop before/after, canvas job, Wetsound install, the shop, Andrew at the bench. Get his OK post-signing. Optimized web copies live in `images/`; keep new ones under ~200KB each.
-5. **Harvest reviews.** Pull verbatim review text + first names from the Google listing and Facebook recommendations into the five review slots. Never paraphrase-as-quote, never invent. Keep star ratings and percentages off the page - platforms disagree.
-6. **Confirm the callback promise.** "We'll call you back within one business day" appears above the form button. Adjust to whatever Andrew will actually honor before launch.
-7. **Get membership specifics.** The program exists (priority service + member discounts, confirmed by Andrew in person, July 2026), but name, price, what's included, and how folks sign up are all unknown. They fill the MEMBERSHIP placeholder in the "Priority membership" section.
-8. **Get the logo file.** Andrew has a real sunrise-over-water logo (visible on the road sign). Ask for a clean image file to replace the text wordmark in the header. Do not recreate it from the sign photo.
-9. **Verify contact details.** Phone (325) 320-2018 and Info@andrewsmarine.net are wired throughout - confirm both are current.
+- **Gallery photos:** the six `images/facebook/` shots come from the shop's public Facebook page and need Andrew's OK.
+- **Logo:** the header uses a text wordmark. Swap in his real logo file when he provides one; never recreate it from the sign photo.
+- **Platinum:** price, term, coverage, and eligibility (see the HTML comment above the Platinum section).
+- **Winterization:** price, booking cutoff, and capacity (see the HTML comment above the winterization panel).
+- **Reviews and certifications:** verbatim quotes only, with permission; list only credentials he actually holds.
+- **Contact details:** confirm (325) 320-2018 and Info@andrewsmarine.net are current.
+- **Launch domain:** andrewsmarine.net, with or without www.
+- **Imagery rule:** never publish the Google Street View image of the shop (Google copyright).
