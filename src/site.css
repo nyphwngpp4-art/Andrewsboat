@@ -1,0 +1,176 @@
+/* Andrew's Marine - Tailwind v4 source.
+   Edit this file or the classes in index.html, then run `npm run build:css`
+   to regenerate assets/site.css (the file the page actually loads).
+
+   Palette: pine green on warm cream, one terracotta accent.
+   Type: Archivo (variable width + weight), semi-condensed for display.
+   Radius rule: panels rounded-3xl, photos/inputs rounded-2xl, buttons/chips full pill. */
+
+@import "tailwindcss" source(none);
+@source "../index.html";
+@source "../assets/site.js";
+
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  src: url("../fonts/archivo-latin-wdth-normal.woff2") format("woff2-variations"),
+       url("../fonts/archivo-latin-wdth-normal.woff2") format("woff2");
+}
+
+@theme {
+  --font-sans: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  --color-pine: #1f3a32;
+  --color-pine-700: #2a4a40;
+  --color-pine-950: #12241e;
+  --color-cream: #f8f5f0;
+  --color-line: #e5e0d5;
+  --color-line-strong: #d1c9b8;
+  --color-ink: #2c332b;
+  --color-ink-muted: #4a5248;
+  --color-ink-subtle: #656a5f;
+  /* Accent. clay passes AA for small text on white and cream;
+     clay-bright is for icons and large display type only. */
+  --color-clay: #a84a24;
+  --color-clay-bright: #b8552d;
+  --color-blush: #f4d9c8;
+  --color-peach: #eab08f;
+}
+
+@utility heading-display {
+  font-stretch: 87.5%;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+@utility icon {
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  body {
+    @apply bg-cream font-sans text-ink antialiased;
+  }
+  ::selection {
+    background: var(--color-blush);
+    color: var(--color-pine-950);
+  }
+  :where(a, button, input, select, textarea, summary):focus-visible {
+    outline: 3px solid var(--color-clay-bright);
+    outline-offset: 3px;
+  }
+  .on-dark :where(a, button):focus-visible {
+    outline-color: #fff;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-full px-6 py-3.5 text-sm font-semibold tracking-wide transition-[background-color,border-color,color,transform] duration-200 active:scale-[0.98];
+  }
+  .btn-primary { @apply bg-pine text-white hover:bg-pine-700; }
+  .btn-light { @apply bg-white text-pine shadow-lg shadow-pine-950/20 hover:bg-cream; }
+  .btn-ghost-light { @apply border border-white/60 text-white backdrop-blur-sm hover:border-white hover:bg-white/10; }
+  .btn-outline { @apply border border-line-strong bg-white text-ink hover:border-pine/40 hover:bg-cream; }
+
+  .field-label { @apply mb-2 block text-sm font-semibold text-ink; }
+  .field-input {
+    @apply w-full rounded-2xl border border-line-strong bg-white px-4 py-3 text-base text-ink transition-[border-color,box-shadow] duration-150 placeholder:text-ink-subtle focus:border-clay focus:ring-4 focus:ring-clay/15 focus:outline-none;
+  }
+
+  .field-select {
+    @apply appearance-none bg-no-repeat pr-11;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%234a5248'%3E%3Cpath d='M5.3 7.3a1 1 0 0 1 1.4 0L10 10.6l3.3-3.3a1 1 0 1 1 1.4 1.4l-4 4a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 0-1.4Z'/%3E%3C/svg%3E");
+    background-size: 1.25rem;
+    background-position: right 0.9rem center;
+  }
+  .field-select:invalid { @apply text-ink-subtle; }
+  .field-select option { @apply text-ink; }
+
+  .eyebrow { @apply text-xs font-semibold tracking-[0.18em] text-clay uppercase; }
+}
+
+/* ---------- Header: transparent over the hero video, solid after ----------
+   site.js sets [data-solid] once the hero has scrolled under the header.
+   Without JS (no .js on <html>) the header is always solid. */
+.site-header {
+  --hdr-bg: rgb(255 255 255 / 0.94);
+  --hdr-fg: var(--color-ink);
+  --hdr-sub: var(--color-ink-subtle);
+  --hdr-line: var(--color-line);
+  --hdr-btn-line: var(--color-line-strong);
+  --hdr-btn-hover: var(--color-cream);
+  --hdr-icon: var(--color-clay-bright);
+  --hdr-cta-bg: var(--color-pine);
+  --hdr-cta-fg: #fff;
+  --hdr-cta-hover: var(--color-pine-700);
+  --hdr-badge-bg: var(--color-pine);
+  --hdr-badge-fg: #fff;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+.js .site-header:not([data-solid]) {
+  --hdr-bg: transparent;
+  --hdr-fg: #fff;
+  --hdr-sub: rgb(255 255 255 / 0.78);
+  --hdr-line: transparent;
+  --hdr-btn-line: rgb(255 255 255 / 0.45);
+  --hdr-btn-hover: rgb(255 255 255 / 0.12);
+  --hdr-icon: #fff;
+  --hdr-cta-bg: #fff;
+  --hdr-cta-fg: var(--color-pine);
+  --hdr-cta-hover: var(--color-cream);
+  --hdr-badge-bg: #fff;
+  --hdr-badge-fg: var(--color-pine);
+}
+.js .site-header:not([data-solid]) :where(a, button):focus-visible {
+  outline-color: #fff;
+}
+.site-header[data-solid],
+html:not(.js) .site-header {
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  backdrop-filter: saturate(160%) blur(12px);
+}
+
+/* ---------- Hero ---------- */
+.hero-overlay {
+  background:
+    linear-gradient(180deg, rgb(10 24 20 / 0.6) 0%, rgb(10 24 20 / 0) 26%),
+    linear-gradient(0deg, rgb(10 24 20 / 0.8) 0%, rgb(10 24 20 / 0.5) 50%, rgb(10 24 20 / 0.25) 100%);
+}
+@media (min-width: 768px) {
+  .hero-overlay {
+    background:
+      linear-gradient(180deg, rgb(10 24 20 / 0.55) 0%, rgb(10 24 20 / 0) 24%),
+      linear-gradient(90deg, rgb(10 24 20 / 0.72) 0%, rgb(10 24 20 / 0.45) 45%, rgb(10 24 20 / 0.08) 85%),
+      linear-gradient(0deg, rgb(10 24 20 / 0.5) 0%, rgb(10 24 20 / 0) 40%);
+  }
+}
+.video-toggle [data-icon="play"] { display: none; }
+.video-toggle[data-state="paused"] [data-icon="play"] { display: block; }
+.video-toggle[data-state="paused"] [data-icon="pause"] { display: none; }
+
+/* ---------- Hours: live open/closed status (set by site.js) ---------- */
+.open-status::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: currentColor;
+}
+.open-status[data-state="open"] { color: #9be2b5; }
+.open-status[data-state="closed"] { color: var(--color-peach); }
+.open-status[data-state="appt"] { color: var(--color-blush); }
+.hours-row[data-today] { color: #fff; font-weight: 700; }

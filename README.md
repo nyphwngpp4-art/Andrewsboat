@@ -1,13 +1,30 @@
 # Andrew's Marine Maintenance & Repair - Demo Site
 
-Single-page static demo built by Agavi AI for Andrew's Marine Maintenance and Repair, LLC (Brownwood, TX / Lake Brownwood). Plain HTML + CSS + vanilla JS, no build step. Everything unverified is a clearly labeled placeholder; nothing on the page is invented.
+Single-page static demo built by Agavi AI for Andrew's Marine Maintenance and Repair, LLC (Brownwood, TX / Lake Brownwood). Plain HTML + precompiled Tailwind CSS + vanilla JS. The built CSS is committed, so there is no deploy build step. Everything unverified is withheld or clearly marked; nothing on the page is invented.
 
 ## Files
 
-- `index.html` - the whole page
-- `styles.css` - all styling (lake teal / warm sand / buoy orange, Big Shoulders Display)
-- `app.js` - form handling (front-end only) and a reduced-motion-aware scroll reveal
-- `README.md` - this file
+- `index.html` - the whole page (plus the inline icon sprite and LocalBusiness schema)
+- `assets/site.css` - **generated** stylesheet the page loads. Do not edit by hand.
+- `assets/site.js` - hero video control, header state, live open/closed hours, and the text-message intake form
+- `src/site.css` - Tailwind source: brand colors, font, and a few custom rules
+- `scripts/build-icons.mjs` - builds the icon sprite in `index.html` from Phosphor Icons
+- `fonts/` - self-hosted Archivo variable font (SIL OFL, license alongside)
+- `images/` - hero video + poster, Google Business photos, and `images/facebook/` gallery photos
+- `og-image.jpg`, `favicon.svg`, `apple-touch-icon.png` - link preview card and icons
+
+## Editing the site
+
+The page uses Tailwind utility classes, compiled ahead of time. **After adding or changing classes in `index.html` or `assets/site.js`, rebuild the CSS**, or the new classes will not show up:
+
+```
+npm install        # first time only
+npm run build:css  # or: npm run watch:css while editing
+```
+
+- Brand colors and the font live in the `@theme` block of `src/site.css` (e.g. `bg-pine`, `text-clay`, `border-line`).
+- Icons: add a Phosphor icon name to `scripts/build-icons.mjs`, run `npm run build:icons`, then use `<svg class="icon size-5" aria-hidden="true"><use href="#i-NAME"/></svg>`.
+- Preview locally with any static server, e.g. `python3 -m http.server` in the repo root.
 
 ## Deploy to Cloudflare Pages
 
@@ -15,22 +32,22 @@ Option A - direct upload (fastest for a demo):
 
 1. Log in to the Cloudflare dashboard and go to **Workers & Pages > Create > Pages > Upload assets**.
 2. Name the project (e.g. `andrews-marine-demo`).
-3. Drag in the repo folder (or a zip of `index.html`, `styles.css`, `app.js`).
+3. Upload `index.html`, `assets/`, `fonts/`, `images/`, `og-image.jpg`, `favicon.svg`, and `apple-touch-icon.png`. Leave out `node_modules/` if you have run `npm install`.
 4. Deploy. The site is live at `https://<project>.pages.dev` in under a minute.
 
 Option B - Git integration (auto-deploys on push):
 
 1. **Workers & Pages > Create > Pages > Connect to Git** and pick this repository.
-2. Build settings: framework preset **None**, build command **(leave empty)**, output directory **/** (repo root).
+2. Build settings: framework preset **None**, build command **(leave empty)**, output directory **/** (repo root). The committed `assets/site.css` is what ships. (Optionally set the build command to `npm run build:css` so Cloudflare rebuilds it on every push.)
 3. Save and deploy. Every push to the connected branch redeploys.
 
 Post-deploy step (both options):
 
-- Open `index.html` and replace the two relative `og-image.png` references in the social-preview meta tags with the absolute URL (`https://<project>.pages.dev/og-image.png`). Texting apps and Messenger ignore relative og:image paths; this one edit is what makes the link preview card show up when the demo URL is texted to Andrew.
+- Open `index.html` and replace the two relative `og-image.jpg` references in the social-preview meta tags with the absolute URL (`https://<project>.pages.dev/og-image.jpg`). Texting apps and Messenger ignore relative og:image paths; this one edit is what makes the link preview card show up when the demo URL is texted to Andrew.
 
 Production notes:
 
-- The Request Service form is front-end only in the demo. For production, add a Cloudflare Pages Function (e.g. `functions/api/request.js`) that emails submissions to `Info@andrewsmarine.net` (MailChannels or an SMTP API), and point the form at it.
+- The Request Service form has no server: it builds a structured text message in the visitor's messaging app (with a copy-paste fallback on desktops). If Andrew would rather get submissions by email, add a Cloudflare Pages Function (e.g. `functions/api/request.js`) that emails `Info@andrewsmarine.net` (MailChannels or an SMTP API) and point the form at it.
 - **Domain:** `andrewsmarine.net` is already owned - the shop's email runs on it. The production site can map to that domain in Pages > Custom domains instead of buying a new one.
 
 ## Pitch notes (field intel, use in the room)
