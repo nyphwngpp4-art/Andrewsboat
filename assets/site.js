@@ -93,6 +93,34 @@
     });
   }
 
+  // ----- Mobile nav: toggle panel, Escape, scroll lock, link dismiss -----
+  var navToggle = document.querySelector("[data-nav-toggle]");
+  var mobileNav = document.querySelector("[data-mobile-nav]");
+  if (navToggle && mobileNav && header) {
+    var setNavOpen = function (open) {
+      mobileNav.hidden = !open;
+      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
+      navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      header.toggleAttribute("data-nav-open", open);
+      document.body.toggleAttribute("data-nav-lock", open);
+    };
+    navToggle.addEventListener("click", function () {
+      setNavOpen(mobileNav.hidden);
+    });
+    mobileNav.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () { setNavOpen(false); });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && !mobileNav.hidden) {
+        setNavOpen(false);
+        navToggle.focus();
+      }
+    });
+    window.matchMedia("(min-width: 1024px)").addEventListener("change", function (e) {
+      if (e.matches) setNavOpen(false);
+    });
+  }
+
   // ----- Seasonal content: hide after its data-show-until date (shop time) -----
   document.querySelectorAll("[data-show-until]").forEach(function (el) {
     var until = new Date(el.getAttribute("data-show-until") + "T23:59:59-06:00");

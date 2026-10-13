@@ -121,7 +121,7 @@
   --hdr-badge-fg: #fff;
   transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 }
-.js .site-header:not([data-solid]) {
+.js .site-header:not([data-solid]):not([data-nav-open]) {
   --hdr-bg: transparent;
   --hdr-fg: #fff;
   --hdr-sub: rgb(255 255 255 / 0.78);
@@ -135,14 +135,21 @@
   --hdr-badge-bg: #fff;
   --hdr-badge-fg: var(--color-pine);
 }
-.js .site-header:not([data-solid]) :where(a, button):focus-visible {
+.js .site-header:not([data-solid]):not([data-nav-open]) :where(a, button):focus-visible {
   outline-color: #fff;
 }
 .site-header[data-solid],
+.site-header[data-nav-open],
 html:not(.js) .site-header {
   -webkit-backdrop-filter: saturate(160%) blur(12px);
   backdrop-filter: saturate(160%) blur(12px);
 }
+
+/* Mobile nav: list/x toggle icons swap when open */
+.nav-toggle[aria-expanded="true"] [data-icon="open"] { display: none; }
+.nav-toggle[aria-expanded="true"] [data-icon="close"] { display: block; }
+.nav-toggle[aria-expanded="false"] [data-icon="close"] { display: none; }
+body[data-nav-lock] { overflow: hidden; }
 
 /* ---------- Hero ---------- */
 .hero-overlay {
