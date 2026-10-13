@@ -13,7 +13,7 @@ const assets = join(root, "node_modules/@phosphor-icons/core/assets");
 const ICONS = {
   bold: [
     "phone", "chat-circle-dots", "clipboard-text", "arrow-right", "check",
-    "pause", "play", "map-pin", "copy",
+    "pause", "play", "map-pin", "copy", "list", "x",
   ],
   duotone: [
     // Platinum
